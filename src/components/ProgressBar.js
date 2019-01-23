@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 15,
         backgroundColor: '#04d78a',
-        elevation: 1,
+        elevation: 1, // android
+        // todo: ios
     },
     progressContainer: {
         flex: 1,
