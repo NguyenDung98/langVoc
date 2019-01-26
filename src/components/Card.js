@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Text, TouchableWithoutFeedback, Dimensions, StyleSheet, View, Image} from 'react-native';
 import PropTypes from 'prop-types';
+import {lightGreen, monsterratMedium, monsterratMediumItalic} from "../constants";
 
 class Card extends Component {
     state = {
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 150 * 0.05,
         borderWidth: 1,
-        borderColor: '#04d78a'
+        borderColor: lightGreen
     },
     textContainerStyle: {
         flexDirection: 'row',
@@ -92,13 +93,13 @@ const styles = StyleSheet.create({
     },
     wordTypeStyle: {
         color: 'grey',
-        fontFamily: 'monsterrat-medium-italic',
+        fontFamily: monsterratMediumItalic,
         textAlign: 'center',
         fontSize: 16
     },
     definitionStyle: {
         fontStyle: 'normal',
-        fontFamily: 'monsterrat-medium',
+        fontFamily: monsterratMedium,
         color: 'black'
     }
 });

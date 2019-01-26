@@ -3,6 +3,7 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import * as Progress from "react-native-progress";
 import PropTypes from 'prop-types';
+import {lightGreen} from "../constants";
 
 class ProgressBar extends Component {
     static propTypes = {
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 15,
-        backgroundColor: '#04d78a',
+        backgroundColor: lightGreen,
         elevation: 1, // android
         // todo: ios
     },

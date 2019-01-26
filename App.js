@@ -2,13 +2,14 @@ import React, {Component} from "react";
 import {
     StyleSheet,
     View,
-    SafeAreaView,
-    Text
+    Text,
 } from "react-native";
 import ProgressBar from "./src/components/ProgressBar";
 import {Font} from "expo";
 import Card from "./src/components/Card";
 import StatusBar from "./src/components/StatusBar";
+import Learning from "./src/components/Learning";
+import {monsterratItalic, monsterratMedium, monsterratMediumItalic, monsterratRegular} from "./src/constants";
 
 export default class App extends Component {
     state = {
@@ -17,12 +18,13 @@ export default class App extends Component {
 
     async componentDidMount() {
         await Font.loadAsync({
-            'monsterrat-regular': require('./assets/fonts/Montserrat-Regular.ttf'),
-            'monsterrat-medium': require('./assets/fonts/Montserrat-Medium.ttf'),
-            'monsterrat-medium-italic': require('./assets/fonts/Montserrat-MediumItalic.ttf')
+            [monsterratRegular]: require('./assets/fonts/Montserrat-Regular.ttf'),
+            [monsterratMedium]: require('./assets/fonts/Montserrat-Medium.ttf'),
+            [monsterratMediumItalic]: require('./assets/fonts/Montserrat-MediumItalic.ttf'),
+            [monsterratItalic]: require('./assets/fonts/Montserrat-Italic.ttf')
         });
 
-        this.setState({fontLoaded: true})
+        this.setState({fontLoaded: true});
     }
 
     render() {
@@ -31,8 +33,8 @@ export default class App extends Component {
         if (!this.state.fontLoaded) return <Text>Loading...</Text>;
 
         return (
-            <SafeAreaView style={container}>
-                <StatusBar backgroundColor={'#068E47'} />
+            <View style={container}>
+                <StatusBar backgroundColor={'#068E47'}/>
                 <ProgressBar
                     progress={0.4}
                     goBack={() => alert("hello")}
@@ -42,9 +44,12 @@ export default class App extends Component {
                     definition={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. eum id incidunt ipsa ipsam ipsum nihil, possimus repudiandae saepe soluta tempore voluptate.'}
                     wordType={'n'}
                 />
-                <View style={{flex: 3, backgroundColor: 'pink'}}>
-                </View>
-            </SafeAreaView>
+                <Learning
+                    word={'Actor'}
+                    spelling={'/ˈæk.tɚ/'}
+                    meaning={'Diễn viên (nam)'}
+                />
+            </View>
         );
     }
 }

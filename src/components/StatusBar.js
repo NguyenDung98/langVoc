@@ -8,13 +8,9 @@ export default function StatusBar({backgroundColor}) {
     )
 }
 
-const version = parseInt(Platform.Version, 10);
-
 const styles = StyleSheet.create({
     statusBar: {
-        height: Platform.OS === "android" || version < 11
-            ? Constants.statusBarHeight
-            : 0
+        height: Constants.statusBarHeight
     }
 });
 
