@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 2,
         padding: 20,
-        backgroundColor: '#d6d6d6'
+        backgroundColor: '#d6d6d6',
     },
     cardContainer: {
         flex: 1,
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
         borderRadius: (width - 40) * 0.05,
         justifyContent: 'center',
         alignItems: 'center',
+        minHeight: 190
     },
     imageStyle: {
         width: 150,

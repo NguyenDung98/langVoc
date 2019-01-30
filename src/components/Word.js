@@ -10,12 +10,13 @@ export default class Word extends React.Component {
     };
 
     static propTypes = {
-        word: PropTypes.string.isRequired,
+        word: PropTypes.string,
         meaning: PropTypes.string,
         spelling: PropTypes.string,
     };
 
     static defaultProps = {
+        word: '',
         meaning: '',
         spelling: ''
     };

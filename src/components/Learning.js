@@ -1,16 +1,15 @@
 import React from "react";
-import {View, StyleSheet} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 import Guide from "./Guide";
 import Word from "./Word";
 import Answer from "./Answer";
 
-export default function Learning({word, meaning, spelling}) {
+export default function Learning({word, meaning, spelling, guide}) {
     return (
         <View style={styles.container}>
             <Guide
-                content={'Nhập từ vào ô bên dưới'}
+                content={guide}
             />
             <Word
                 word={word}
@@ -25,14 +24,17 @@ export default function Learning({word, meaning, spelling}) {
 }
 
 Learning.propTypes = {
-    word: PropTypes.string.isRequired,
+    word: PropTypes.string,
     meaning: PropTypes.string,
     spelling: PropTypes.string,
+    guide: PropTypes.string,
 };
 
 Learning.defaultProps = {
+    word: '',
     meaning: '',
-    spelling: ''
+    spelling: '',
+    guide: ''
 };
 
 const styles = StyleSheet.create({

@@ -1,14 +1,13 @@
 import React, {Component} from "react";
 import {
     StyleSheet,
-    View,
+    KeyboardAvoidingView,
     Text,
 } from "react-native";
 import ProgressBar from "./src/components/ProgressBar";
 import {Font} from "expo";
-import Card from "./src/components/Card";
 import StatusBar from "./src/components/StatusBar";
-import Learning from "./src/components/Learning";
+import Content from "./Content";
 import {monsterratItalic, monsterratMedium, monsterratMediumItalic, monsterratRegular} from "./src/constants";
 
 export default class App extends Component {
@@ -33,23 +32,26 @@ export default class App extends Component {
         if (!this.state.fontLoaded) return <Text>Loading...</Text>;
 
         return (
-            <View style={container}>
+            <KeyboardAvoidingView
+                style={container}
+                behavior={'padding'}
+                enabled
+            >
                 <StatusBar backgroundColor={'#068E47'}/>
                 <ProgressBar
                     progress={0.4}
                     goBack={() => alert("hello")}
                 />
-                <Card
+                <Content
+                    guide={'Nhập từ vào ô bên dưới'}
                     image={{uri: 'https://unsplash.it/600/600'}}
-                    definition={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. eum id incidunt ipsa ipsam ipsum nihil, possimus repudiandae saepe soluta tempore voluptate.'}
-                    wordType={'n'}
-                />
-                <Learning
                     word={'Actor'}
+                    wordType={'n'}
                     spelling={'/ˈæk.tɚ/'}
                     meaning={'Diễn viên (nam)'}
+                    definition={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. eum id incidunt ipsa ipsam ipsum nihil, possimus repudiandae saepe soluta tempore voluptate.'}
                 />
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
