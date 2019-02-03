@@ -1,8 +1,9 @@
 import React from "react";
 import {View, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import {Audio} from 'expo';
 import {lightGreen, monsterratItalic, monsterratMedium, monsterratRegular} from "../constants";
-import PropTypes from "prop-types";
+import {WordShape} from "../utils/WordUtils";
 
 export default class Word extends React.Component {
     state = {
@@ -10,15 +11,7 @@ export default class Word extends React.Component {
     };
 
     static propTypes = {
-        word: PropTypes.string,
-        meaning: PropTypes.string,
-        spelling: PropTypes.string,
-    };
-
-    static defaultProps = {
-        word: '',
-        meaning: '',
-        spelling: ''
+        wordForm: WordShape.isRequired
     };
 
     _toggleBtnColor = isClicked => {
@@ -30,8 +23,16 @@ export default class Word extends React.Component {
         this.setState({volumBtnColor: lightGreen})
     };
 
+    _onAudioPlay = async () => {
+        const {audio} = this.props.wordForm;
+
+        if (!audio) return;
+
+        await Audio.Sound.createAsync(audio, {shouldPlay: true})
+    };
+
     render() {
-        const {word, spelling, meaning} = this.props;
+        const {word, spelling, meaning} = this.props.wordForm;
         const {container, wordStyle, spellingStyle, meaningStyle, volumeBtnContainer} = styles;
 
         return (
@@ -41,7 +42,7 @@ export default class Word extends React.Component {
                 <Text style={meaningStyle}>{meaning}</Text>
                 <TouchableHighlight
                     style={volumeBtnContainer}
-                    onPress={() => alert("hello")}
+                    onPress={this._onAudioPlay}
                     onShowUnderlay={() => this._toggleBtnColor(true)}
                     onHideUnderlay={this._toggleBtnColor}
                     underlayColor={lightGreen}

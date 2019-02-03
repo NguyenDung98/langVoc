@@ -7,8 +7,9 @@ import {
 import ProgressBar from "./src/components/ProgressBar";
 import {Font} from "expo";
 import StatusBar from "./src/components/StatusBar";
-import Content from "./Content";
+import Content from "./src/components/Content";
 import {monsterratItalic, monsterratMedium, monsterratMediumItalic, monsterratRegular} from "./src/constants";
+import {createCard, createWord} from './src/utils';
 
 export default class App extends Component {
     state = {
@@ -44,12 +45,17 @@ export default class App extends Component {
                 />
                 <Content
                     guide={'Nhập từ vào ô bên dưới'}
-                    image={{uri: 'https://unsplash.it/600/600'}}
-                    word={'Actor'}
-                    wordType={'n'}
-                    spelling={'/ˈæk.tɚ/'}
-                    meaning={'Diễn viên (nam)'}
-                    definition={'Lorem ipsum dolor sit amet, consectetur adipisicing elit. eum id incidunt ipsa ipsam ipsum nihil, possimus repudiandae saepe soluta tempore voluptate.'}
+                    cardForm={createCard({
+                        image: {uri: 'https://unsplash.it/600/600'},
+                        wordType: 'n',
+                        definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. eum id incidunt ipsa ipsam ipsum nihil, possimus repudiandae saepe soluta tempore voluptate.'
+                    })}
+                    wordForm={createWord({
+                        word: 'Actor',
+                        spelling: '/ˈæk.tɚ/',
+                        meaning: 'Diễn viên (nam)',
+                        audio: {uri: 'https://dictionary.cambridge.org/media/english/us_pron/a/act/actor/actor.mp3'}
+                    })}
                 />
             </KeyboardAvoidingView>
         );

@@ -1,40 +1,32 @@
 import React from "react";
-import {StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 import Guide from "./Guide";
 import Word from "./Word";
 import Answer from "./Answer";
+import {WordShape} from "../utils/WordUtils";
 
-export default function Learning({word, meaning, spelling, guide}) {
+export default function Learning({wordForm, guide}) {
     return (
         <View style={styles.container}>
             <Guide
                 content={guide}
             />
-            <Word
-                word={word}
-                spelling={spelling}
-                meaning={meaning}
-            />
+            <Word wordForm={wordForm}/>
             <Answer
-                placeholder={word}
+                placeholder={wordForm.word}
             />
         </View>
     )
 }
 
 Learning.propTypes = {
-    word: PropTypes.string,
-    meaning: PropTypes.string,
-    spelling: PropTypes.string,
+    wordForm: WordShape.isRequired,
     guide: PropTypes.string,
 };
 
 Learning.defaultProps = {
-    word: '',
-    meaning: '',
-    spelling: '',
-    guide: ''
+    guide: '',
 };
 
 const styles = StyleSheet.create({

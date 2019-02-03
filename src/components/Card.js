@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Text, TouchableWithoutFeedback, Dimensions, StyleSheet, View, Image} from 'react-native';
 import PropTypes from 'prop-types';
 import {lightGreen, monsterratMedium, monsterratMediumItalic} from "../constants";
+import {CardShape} from "../utils/CardUtils";
 
 class Card extends Component {
     state = {
@@ -9,9 +10,7 @@ class Card extends Component {
     };
 
     static propTypes = {
-        image: Image.propTypes.source.isRequired,
-        wordType: PropTypes.string.isRequired,
-        definition: PropTypes.string.isRequired,
+        cardForm: CardShape.isRequired
     };
 
     _toggleCard = () => {
@@ -21,7 +20,7 @@ class Card extends Component {
     };
 
     _renderContent = () => {
-        const {image, definition, wordType} = this.props;
+        const {image, definition, wordType} = this.props.cardForm;
         const {
             imageStyle,
             textContainerStyle,
