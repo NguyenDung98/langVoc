@@ -7,20 +7,35 @@ import {WordShape} from "../utils/WordUtils";
 
 export default class Word extends React.Component {
     state = {
-        volumBtnColor: lightGreen
+        volumeBtnColor: lightGreen,
+        volumeBtnContainerColor: 'white',
+        isPlaying: false
     };
 
     static propTypes = {
         wordForm: WordShape.isRequired
     };
 
-    _toggleBtnColor = isClicked => {
-        if (isClicked) {
-            this.setState({volumBtnColor: 'white'});
-            return;
+    _onPlaybackStatusUpdate = ({didJustFinish}) => {
+        if (didJustFinish) {
+            this._hideUnderlay();
         }
+    };
 
-        this.setState({volumBtnColor: lightGreen})
+    _showUnderlay = () => {
+        this.setState({
+            isPlaying: true,
+            volumeBtnColor: 'white',
+            volumeBtnContainerColor: lightGreen,
+        });
+    };
+
+    _hideUnderlay = () => {
+        this.setState({
+            volumeBtnColor: lightGreen,
+            volumeBtnContainerColor: 'white',
+            isPlaying: false
+        });
     };
 
     _onAudioPlay = async () => {
@@ -28,10 +43,17 @@ export default class Word extends React.Component {
 
         if (!audio) return;
 
-        await Audio.Sound.createAsync(audio, {shouldPlay: true})
+        try {
+            this._showUnderlay();
+            const {sound} = await Audio.Sound.createAsync(audio, {shouldPlay: true});
+            sound.setOnPlaybackStatusUpdate(this._onPlaybackStatusUpdate);
+        } catch (e) {
+            console.log('Audio error')
+        }
     };
 
     render() {
+        const {isPlaying, volumeBtnColor, volumeBtnContainerColor} = this.state;
         const {word, spelling, meaning} = this.props.wordForm;
         const {container, wordStyle, spellingStyle, meaningStyle, volumeBtnContainer} = styles;
 
@@ -41,16 +63,15 @@ export default class Word extends React.Component {
                 <Text style={spellingStyle}>{spelling}</Text>
                 <Text style={meaningStyle}>{meaning}</Text>
                 <TouchableHighlight
-                    style={volumeBtnContainer}
+                    style={[volumeBtnContainer, {backgroundColor: volumeBtnContainerColor}]}
                     onPress={this._onAudioPlay}
-                    onShowUnderlay={() => this._toggleBtnColor(true)}
-                    onHideUnderlay={this._toggleBtnColor}
-                    underlayColor={lightGreen}
+                    underlayColor={'transparent'}
+                    disabled={isPlaying}
                 >
                     <Ionicons
                         name={'md-volume-high'}
                         size={30}
-                        color={this.state.volumBtnColor}
+                        color={volumeBtnColor}
                     />
                 </TouchableHighlight>
             </View>

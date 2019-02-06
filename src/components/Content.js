@@ -11,7 +11,7 @@ export default function Content({cardForm, wordForm, guide}) {
             style={styles.container}
             contentContainerStyle={styles.container}
             keyboardDismissMode={'none'}
-            keyboardShouldPersistTaps={'always'}
+            keyboardShouldPersistTaps={'handled'}
         >
             <Card cardForm={cardForm}/>
             <Learning

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Text, TouchableWithoutFeedback, Dimensions, StyleSheet, View, Image} from 'react-native';
-import PropTypes from 'prop-types';
 import {lightGreen, monsterratMedium, monsterratMediumItalic} from "../constants";
 import {CardShape} from "../utils/CardUtils";
 

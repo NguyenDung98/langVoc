@@ -1,34 +1,63 @@
 import React from "react";
 import {View, StyleSheet, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import PropTypes from 'prop-types';
-import {lightGreen, monsterratMedium} from "../constants";
+import {disabledColor, lightGreen, monsterratMedium} from "../constants";
 
-export default function Answer({placeholder}) {
-    const {container, inputContainer, inputStyle, answerStyle, checkBtnContainer} = styles;
+export default class Answer extends React.Component {
+    state = {
+        inputBorderColor: disabledColor,
+        submitBtnDisabled: true,
+        answer: ''
+    };
 
-    return (
-        <View style={container}>
-            <View style={answerStyle}>
-                <View style={inputContainer}>
-                    <TextInput
-                        placeholder={placeholder}
-                        style={inputStyle}
-                    />
+    _onInputFocus = () => {
+        this.setState({inputBorderColor: lightGreen})
+    };
+
+    _onInputBlur = () => {
+        this.setState({inputBorderColor: disabledColor})
+    };
+
+    _onChangeText = answer => {
+        this.setState({
+            answer,
+            submitBtnDisabled: !answer
+        })
+    };
+
+    render() {
+        const {inputBorderColor, submitBtnDisabled, answer} = this.state;
+        const {placeholder} = this.props;
+        const {container, inputContainer, inputStyle, answerStyle, checkBtnContainer} = styles;
+
+        return (
+            <View style={container}>
+                <View style={answerStyle}>
+                    <View style={[inputContainer, {borderColor: inputBorderColor}]}>
+                        <TextInput
+                            placeholder={placeholder}
+                            style={inputStyle}
+                            onFocus={this._onInputFocus}
+                            onBlur={this._onInputBlur}
+                            onChangeText={this._onChangeText}
+                            value={answer}
+                        />
+                    </View>
+                    <TouchableOpacity
+                        onPress={() => alert('hello')}
+                        style={checkBtnContainer}
+                        disabled={submitBtnDisabled}
+                    >
+                        <AntDesign
+                            name="caretright"
+                            size={35}
+                            color={submitBtnDisabled ? disabledColor : "#ff5a58"}
+                        />
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                    onPress={() => alert('hello')}
-                    style={checkBtnContainer}
-                >
-                    <AntDesign
-                        name="caretright"
-                        size={35}
-                        color={"#ff5a58"}
-                    />
-                </TouchableOpacity>
             </View>
-        </View>
-    );
+        );
+    }
 }
 
 const {width} = Dimensions.get('screen');
@@ -48,7 +77,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
         borderWidth: 1,
         borderRadius: (width - 30) * 0.01,
-        borderColor: lightGreen
     },
     inputStyle: {
         fontSize: 20,
