@@ -1,9 +1,10 @@
 import React from "react";
 import {View, StyleSheet, Text, TouchableHighlight} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 import {Audio} from 'expo';
-import {lightGreen, monsterratItalic, monsterratMedium, monsterratRegular} from "../constants";
+import {disabledColor, lightGreen, monsterratItalic, monsterratMedium, monsterratRegular} from "../constants";
 import {WordShape} from "../utils/WordUtils";
+import PropTypes from 'prop-types';
 
 export default class Word extends React.Component {
     state = {
@@ -13,7 +14,13 @@ export default class Word extends React.Component {
     };
 
     static propTypes = {
-        wordForm: WordShape.isRequired
+        wordForm: WordShape,
+        disableBtn: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        disableBtn: false,
+        wordForm: null
     };
 
     _onPlaybackStatusUpdate = ({didJustFinish}) => {
@@ -53,9 +60,16 @@ export default class Word extends React.Component {
     };
 
     render() {
+        if (!this.props.wordForm) return null;
+
         const {isPlaying, volumeBtnColor, volumeBtnContainerColor} = this.state;
-        const {word, spelling, meaning} = this.props.wordForm;
+        const {wordForm: {word, spelling, meaning}, disableBtn} = this.props;
         const {container, wordStyle, spellingStyle, meaningStyle, volumeBtnContainer} = styles;
+
+        const dynamicBtn = {
+            backgroundColor: volumeBtnContainerColor,
+            borderColor: disableBtn ? disabledColor : lightGreen,
+        };
 
         return (
             <View style={container}>
@@ -63,15 +77,15 @@ export default class Word extends React.Component {
                 <Text style={spellingStyle}>{spelling}</Text>
                 <Text style={meaningStyle}>{meaning}</Text>
                 <TouchableHighlight
-                    style={[volumeBtnContainer, {backgroundColor: volumeBtnContainerColor}]}
+                    style={[volumeBtnContainer, dynamicBtn]}
                     onPress={this._onAudioPlay}
                     underlayColor={'transparent'}
-                    disabled={isPlaying}
+                    disabled={disableBtn || isPlaying}
                 >
                     <Ionicons
                         name={'md-volume-high'}
                         size={30}
-                        color={volumeBtnColor}
+                        color={disableBtn ? disabledColor : volumeBtnColor}
                     />
                 </TouchableHighlight>
             </View>
@@ -104,7 +118,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 55 * 0.5,
         borderWidth: 1,
-        borderColor: lightGreen,
         padding: 5,
         marginTop: 5
     }

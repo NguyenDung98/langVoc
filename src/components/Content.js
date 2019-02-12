@@ -5,7 +5,7 @@ import Learning from "./Learning";
 import PropTypes from 'prop-types';
 import {CardShape, WordShape} from '../utils';
 
-export default function Content({cardForm, wordForm, guide}) {
+export default function Content({cardForm, wordForm, guide, hideDefinition, placeholder, disableBtn}) {
     return (
         <ScrollView
             style={styles.container}
@@ -13,10 +13,15 @@ export default function Content({cardForm, wordForm, guide}) {
             keyboardDismissMode={'none'}
             keyboardShouldPersistTaps={'handled'}
         >
-            <Card cardForm={cardForm}/>
+            <Card
+                cardForm={cardForm}
+                hideDefinition={hideDefinition}
+            />
             <Learning
                 guide={guide}
                 wordForm={wordForm}
+                placeholder={placeholder}
+                disableBtn={disableBtn}
             />
         </ScrollView>
     )
@@ -30,10 +35,9 @@ const styles = StyleSheet.create({
 
 Content.propTypes = {
     cardForm: CardShape.isRequired,
-    wordForm: WordShape.isRequired,
+    hideDefinition: PropTypes.bool,
+    wordForm: WordShape,
     guide: PropTypes.string,
-};
-
-Content.defaultProps = {
-    guide: ''
+    placeholder: PropTypes.string.isRequired,
+    disableBtn: PropTypes.bool
 };

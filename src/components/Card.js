@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Text, TouchableWithoutFeedback, Dimensions, StyleSheet, View, Image} from 'react-native';
 import {lightGreen, monsterratMedium, monsterratMediumItalic} from "../constants";
 import {CardShape} from "../utils/CardUtils";
+import PropTypes from 'prop-types';
 
 class Card extends Component {
     state = {
@@ -9,10 +10,19 @@ class Card extends Component {
     };
 
     static propTypes = {
-        cardForm: CardShape.isRequired
+        cardForm: CardShape.isRequired,
+        hideDefinition: PropTypes.bool
+    };
+
+    static defaultProps = {
+        hideDefinition: false
     };
 
     _toggleCard = () => {
+        const {hideDefinition} = this.props;
+
+        if (hideDefinition) return;
+
         this.setState(prevState => ({
             showImage: !prevState.showImage
         }))

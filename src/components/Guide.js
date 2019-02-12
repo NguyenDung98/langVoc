@@ -16,7 +16,11 @@ export default function Guide({content}) {
 }
 
 Guide.propTypes = {
-    content: PropTypes.string.isRequired
+    content: PropTypes.string
+};
+
+Guide.defaultProps = {
+    content: ''
 };
 
 const styles = StyleSheet.create({
