@@ -2,16 +2,17 @@ import React from "react";
 import {View, StyleSheet, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import {disabledColor, lightGreen, monsterratMedium} from "../constants";
+import store from "../store";
 
 export default class Answer extends React.Component {
     state = {
         inputBorderColor: disabledColor,
         submitBtnDisabled: true,
-        answer: ''
+        answer: '',
     };
 
     _onInputFocus = () => {
-        this.setState({inputBorderColor: lightGreen})
+        this.setState({inputBorderColor: lightGreen});
     };
 
     _onInputBlur = () => {
@@ -23,6 +24,27 @@ export default class Answer extends React.Component {
             answer,
             submitBtnDisabled: !answer
         })
+    };
+
+	_submitAnswer = () => {
+	    const { moveToNextPage, rightAnswer } = this.props;
+	    const { answer } = this.state;
+	    const { badDecks, currentDeck } = store.getState();
+
+	    if (answer.trim().toLowerCase() !== rightAnswer.toLowerCase()) {
+		    store.setState({
+			    badDecks: [
+				    ...badDecks,
+				    currentDeck,
+			    ]
+		    });
+        }
+
+	    this.setState({
+            answer: '',
+		    submitBtnDisabled: true,
+        });
+	    moveToNextPage()
     };
 
     render() {
@@ -44,7 +66,7 @@ export default class Answer extends React.Component {
                         />
                     </View>
                     <TouchableOpacity
-                        onPress={() => alert('hello')}
+                        onPress={this._submitAnswer}
                         style={checkBtnContainer}
                         disabled={submitBtnDisabled}
                     >

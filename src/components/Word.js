@@ -1,18 +1,13 @@
 import React from "react";
-import {View, StyleSheet, Text, TouchableHighlight} from 'react-native';
+import {View, StyleSheet, Text, TouchableHighlight, Dimensions} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import {Audio} from 'expo';
+
 import {disabledColor, lightGreen, monsterratItalic, monsterratMedium, monsterratRegular} from "../constants";
 import {WordShape} from "../utils/WordUtils";
 import PropTypes from 'prop-types';
 
 export default class Word extends React.Component {
-    state = {
-        volumeBtnColor: lightGreen,
-        volumeBtnContainerColor: 'white',
-        isPlaying: false
-    };
-
     static propTypes = {
         wordForm: WordShape,
         disableBtn: PropTypes.bool,
@@ -22,6 +17,12 @@ export default class Word extends React.Component {
         disableBtn: false,
         wordForm: null
     };
+
+	state = {
+		volumeBtnColor: lightGreen,
+		volumeBtnContainerColor: 'white',
+		isPlaying: false
+	};
 
     _onPlaybackStatusUpdate = ({didJustFinish}) => {
         if (didJustFinish) {
@@ -95,7 +96,10 @@ export default class Word extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+	    flex: 1,
+	    alignItems: 'center',
+	    justifyContent: 'space-evenly',
+	    marginBottom: 10,
     },
     wordStyle: {
         fontSize: 30,

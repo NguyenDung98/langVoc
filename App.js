@@ -1,105 +1,88 @@
 import React, {Component} from "react";
 import {
-    StyleSheet,
-    KeyboardAvoidingView,
-    Text,
+	StyleSheet,
+	KeyboardAvoidingView,
+	Text,
 } from "react-native";
 import ProgressBar from "./src/components/ProgressBar";
-import {Font} from "expo";
 import StatusBar from "./src/components/StatusBar";
-import Content from "./src/components/Content";
-import {monsterratItalic, monsterratMedium, monsterratMediumItalic, monsterratRegular} from "./src/constants";
-import {createCard, createWord} from './src/utils';
+import {ViewPager} from 'rn-viewpager';
+
+import {Font} from "expo";
+import {monsterratItalic, monsterratMedium, monsterratMediumItalic, monsterratRegular, data} from "./src/constants";
+import {createDeckLesson} from './src/utils';
+import store from "./src/store";
 
 export default class App extends Component {
-    state = {
-        fontLoaded: false,
-    };
+	state = {
+		fontLoaded: false,
+	};
 
-    async componentDidMount() {
-        await Font.loadAsync({
-            [monsterratRegular]: require('./assets/fonts/Montserrat-Regular.ttf'),
-            [monsterratMedium]: require('./assets/fonts/Montserrat-Medium.ttf'),
-            [monsterratMediumItalic]: require('./assets/fonts/Montserrat-MediumItalic.ttf'),
-            [monsterratItalic]: require('./assets/fonts/Montserrat-Italic.ttf')
-        });
+	viewPager = null;
 
-        this.setState({fontLoaded: true});
-    }
+	async componentDidMount() {
+		await Font.loadAsync({
+			[monsterratRegular]: require('./assets/fonts/Montserrat-Regular.ttf'),
+			[monsterratMedium]: require('./assets/fonts/Montserrat-Medium.ttf'),
+			[monsterratMediumItalic]: require('./assets/fonts/Montserrat-MediumItalic.ttf'),
+			[monsterratItalic]: require('./assets/fonts/Montserrat-Italic.ttf')
+		});
 
-    render() {
-        const {container} = styles;
+		this.setState({fontLoaded: true});
+	}
 
-        if (!this.state.fontLoaded) return <Text>Loading...</Text>;
+	_moveToNextDeck = () => {
+		const { currentDeck, decksLength, badDecks, lessonOver } = store.getState();
+		let index = 0;
 
-        return (
-            <KeyboardAvoidingView
-                style={container}
-                behavior={'padding'}
-                enabled
-            >
-                <StatusBar backgroundColor={'#068E47'}/>
-                <ProgressBar
-                    progress={0.4}
-                    goBack={() => alert("hello")}
-                />
-                <Content
-                    guide={'Bạn đoán xem từ này là gì?'}
-                    cardForm={createCard({
-                        image: {uri: 'https://unsplash.it/600/600'},
-                    })}
-                    hideDefinition
-                    placeholder={'Nhập đáp án'}
-                />
-                {/*<Content*/}
-                    {/*guide={'Bạn đoán xem từ này là gì?'}*/}
-                    {/*cardForm={createCard({*/}
-                        {/*image: {uri: 'https://unsplash.it/600/600'},*/}
-                    {/*})}*/}
-                    {/*hideDefinition*/}
-                    {/*wordForm={createWord({*/}
-                        {/*word: '???',*/}
-                        {/*meaning: 'Diễn viên (nam)',*/}
-                        {/*audio: {uri: 'https://dictionary.cambridge.org/media/english/us_pron/a/act/actor/actor.mp3'}*/}
-                    {/*})}*/}
-                    {/*disableBtn*/}
-                    {/*placeholder={'Nhập đáp án'}*/}
-                {/*/>*/}
-                {/*<Content*/}
-                    {/*guide={'Bạn đoán xem từ này là gì?'}*/}
-                    {/*cardForm={createCard({*/}
-                        {/*image: {uri: 'https://unsplash.it/600/600'},*/}
-                    {/*})}*/}
-                    {/*hideDefinition*/}
-                    {/*wordForm={createWord({*/}
-                        {/*word: '???',*/}
-                        {/*spelling: '/ˈæk.tɚ/',*/}
-                        {/*meaning: 'Diễn viên (nam)',*/}
-                        {/*audio: {uri: 'https://dictionary.cambridge.org/media/english/us_pron/a/act/actor/actor.mp3'}*/}
-                    {/*})}*/}
-                    {/*placeholder={'Nhập đáp án'}*/}
-                {/*/>*/}
-                {/*<Content*/}
-                    {/*guide={'Nhập từ vào ô bên dưới'}*/}
-                    {/*cardForm={createCard({*/}
-                        {/*image: {uri: 'https://unsplash.it/600/600'},*/}
-                        {/*wordType: 'n',*/}
-                        {/*definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. eum id incidunt ipsa ipsam ipsum nihil, possimus repudiandae saepe soluta tempore voluptate.'*/}
-                    {/*})}*/}
-                    {/*wordForm={createWord({*/}
-                        {/*word: 'Actor',*/}
-                        {/*spelling: '/ˈæk.tɚ/',*/}
-                        {/*meaning: 'Diễn viên (nam)',*/}
-                        {/*audio: {uri: 'https://dictionary.cambridge.org/media/english/us_pron/a/act/actor/actor.mp3'}*/}
-                    {/*})}*/}
-                {/*/>*/}
-            </KeyboardAvoidingView>
-        );
-    }
+		if (currentDeck < decksLength - 1 && !lessonOver) {
+			index = currentDeck + 1;
+			store.setState({
+				currentDeck: index,
+			});
+
+			this.viewPager.setPage(index);
+		} else if (badDecks.length) {
+			index = badDecks.shift();
+			store.setState({
+				currentDeck: index,
+				lessonOver: true,
+			});
+
+			this.viewPager.setPage(index);
+		}
+	};
+
+	render() {
+		const {container} = styles;
+
+		if (!this.state.fontLoaded) return <Text>Loading...</Text>;
+
+		return (
+			<KeyboardAvoidingView
+				style={container}
+				behavior={'padding'}
+				enabled
+			>
+				<StatusBar translucent backgroundColor={'#068E47'}/>
+				<ProgressBar
+					progress={0.4}
+					goBack={() => alert("hello")}
+				/>
+				<ViewPager
+					ref={viewPager => this.viewPager = viewPager}
+					style={container}
+					horizontalScroll={false}
+				>
+					{createDeckLesson(data, this._moveToNextDeck)}
+				</ViewPager>
+			</KeyboardAvoidingView>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
+	container: {
+		flex: 1,
+	},
 });

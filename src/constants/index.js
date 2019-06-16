@@ -6,3 +6,5 @@ export const monsterratRegular = 'monsterrat-regular';
 export const monsterratMedium = 'monsterrat-medium';
 export const monsterratMediumItalic = 'monsterrat-medium-italic';
 export const monsterratItalic = 'monsterrat-italic';
+
+export * from './data';

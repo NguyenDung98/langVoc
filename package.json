@@ -11,7 +11,8 @@
     "prop-types": "latest",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-progress": "^3.5.0"
+    "react-native-progress": "^3.5.0",
+    "rn-viewpager": "^1.2.9"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
