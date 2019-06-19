@@ -3,7 +3,7 @@ import {
 	StyleSheet,
 	KeyboardAvoidingView,
 	Text,
-} from "react-native";
+	} from "react-native";
 import ProgressBar from "./src/components/ProgressBar";
 import StatusBar from "./src/components/StatusBar";
 import {ViewPager} from 'rn-viewpager';
@@ -12,6 +12,7 @@ import {Font} from "expo";
 import {monsterratItalic, monsterratMedium, monsterratMediumItalic, monsterratRegular, data} from "./src/constants";
 import {createDeckLesson} from './src/utils';
 import store from "./src/store";
+import AnswerModal from "./src/components/AnswerModal";
 
 export default class App extends Component {
 	state = {
@@ -32,8 +33,10 @@ export default class App extends Component {
 	}
 
 	_moveToNextDeck = () => {
-		const { currentDeck, decksLength, badDecks, lessonOver } = store.getState();
+		const { totalPossibleGrade, currentDeck, decksLength, badDecks, lessonOver } = store.getState();
 		let index = 0;
+
+		if (totalPossibleGrade > 30) return this._endLesson();
 
 		if (currentDeck < decksLength - 1 && !lessonOver) {
 			index = currentDeck + 1;
@@ -49,14 +52,19 @@ export default class App extends Component {
 				lessonOver: true,
 			});
 
-			this.viewPager.setPage(index);
+			this.viewPager.setPageWithoutAnimation(index);
 		}
 	};
 
-	render() {
-		const {container} = styles;
+	_endLesson = () => {
+		alert('Bạn gõ sai quá nhiều, bắt đầu lại nhé!')
+	};
 
-		if (!this.state.fontLoaded) return <Text>Loading...</Text>;
+	render() {
+		const { fontLoaded } = this.state;
+		const { container } = styles;
+
+		if (!fontLoaded) return <Text>Loading...</Text>;
 
 		return (
 			<KeyboardAvoidingView
@@ -66,7 +74,6 @@ export default class App extends Component {
 			>
 				<StatusBar translucent backgroundColor={'#068E47'}/>
 				<ProgressBar
-					progress={0.4}
 					goBack={() => alert("hello")}
 				/>
 				<ViewPager
@@ -74,8 +81,11 @@ export default class App extends Component {
 					style={container}
 					horizontalScroll={false}
 				>
-					{createDeckLesson(data, this._moveToNextDeck)}
+					{createDeckLesson(data)}
 				</ViewPager>
+				<AnswerModal
+					moveToNextDeck={this._moveToNextDeck}
+				/>
 			</KeyboardAvoidingView>
 		);
 	}

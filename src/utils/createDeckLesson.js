@@ -10,7 +10,7 @@ const getKey = () => {
 	return key++;
 };
 
-const createFirstDeck = ({ word, spelling, meaning, audio, image, wordType, definition }, moveToNextPage) => {
+const createFirstDeck = ({ word, spelling, meaning, audio, image, wordType, definition }) => {
 	return (
 		<View style={{flex: 1}} key={getKey()}>
 			<Content
@@ -28,13 +28,12 @@ const createFirstDeck = ({ word, spelling, meaning, audio, image, wordType, defi
 				})}
 				placeholder={'Nhập đáp án'}
 				rightAnswer={word}
-				moveToNextPage={moveToNextPage}
 			/>
 		</View>
 	)
 };
 
-const createSecondDeck = ({ word, spelling, meaning, audio, image }, moveToNextPage) => {
+const createSecondDeck = ({ word, spelling, meaning, audio, image }) => {
 	return (
 		<View style={{flex: 1}} key={getKey()}>
 			<Content
@@ -51,13 +50,12 @@ const createSecondDeck = ({ word, spelling, meaning, audio, image }, moveToNextP
 				})}
 				placeholder={'Nhập đáp án'}
 				rightAnswer={word}
-				moveToNextPage={moveToNextPage}
 			/>
 		</View>
 	)
 };
 
-const createThirdDeck = ({ word, meaning, audio, image }, moveToNextPage) => {
+const createThirdDeck = ({ word, meaning, audio, image }) => {
 	return (
 		<View style={{flex: 1}} key={getKey()}>
 			<Content
@@ -74,13 +72,12 @@ const createThirdDeck = ({ word, meaning, audio, image }, moveToNextPage) => {
 				disableBtn
 				placeholder={'Nhập đáp án'}
 				rightAnswer={word}
-				moveToNextPage={moveToNextPage}
 			/>
 		</View>
 	)
 };
 
-const createFourthDeck = ({ word, image }, moveToNextPage) => {
+const createFourthDeck = ({ word, image }) => {
 	return (
 		<View style={{flex: 1}} key={getKey()}>
 			<Content
@@ -95,43 +92,44 @@ const createFourthDeck = ({ word, image }, moveToNextPage) => {
 				hideDefinition
 				placeholder={'Nhập đáp án'}
 				rightAnswer={word}
-				moveToNextPage={moveToNextPage}
 			/>
 		</View>
 	)
 };
 
-export const createDeckLesson = (vocab, moveToNextPage) => {
+export const createDeckLesson = (vocab) => {
 	const decks = [];
 	const [firstWord, secondWord, thirdWord, fourthWord, fifthWord] = vocab;
 
-	decks.push(createFirstDeck(firstWord, moveToNextPage));
-	decks.push(createFirstDeck(secondWord, moveToNextPage));
+	decks.push(createFirstDeck(firstWord));
+	decks.push(createFirstDeck(secondWord));
 
-	decks.push(createSecondDeck(firstWord, moveToNextPage));
-	decks.push(createSecondDeck(secondWord, moveToNextPage));
-	decks.push(createFirstDeck(thirdWord, moveToNextPage));
-	decks.push(createFirstDeck(fourthWord, moveToNextPage));
+	decks.push(createSecondDeck(firstWord));
+	decks.push(createSecondDeck(secondWord));
+	decks.push(createFirstDeck(thirdWord));
+	decks.push(createFirstDeck(fourthWord));
 
-	decks.push(createThirdDeck(firstWord, moveToNextPage));
-	decks.push(createThirdDeck(secondWord, moveToNextPage));
-	decks.push(createSecondDeck(thirdWord, moveToNextPage));
-	decks.push(createSecondDeck(fourthWord, moveToNextPage));
-	decks.push(createFirstDeck(fifthWord, moveToNextPage));
+	decks.push(createThirdDeck(firstWord));
+	decks.push(createThirdDeck(secondWord));
+	decks.push(createSecondDeck(thirdWord));
+	decks.push(createSecondDeck(fourthWord));
+	decks.push(createFirstDeck(fifthWord));
 
-	decks.push(createSecondDeck(fifthWord, moveToNextPage));
-	decks.push(createThirdDeck(thirdWord, moveToNextPage));
-	decks.push(createThirdDeck(fourthWord, moveToNextPage));
-	decks.push(createThirdDeck(fifthWord, moveToNextPage));
+	decks.push(createSecondDeck(fifthWord));
+	decks.push(createThirdDeck(thirdWord));
+	decks.push(createThirdDeck(fourthWord));
+	decks.push(createThirdDeck(fifthWord));
 
-	decks.push(createFourthDeck(firstWord, moveToNextPage));
-	decks.push(createFourthDeck(secondWord, moveToNextPage));
-	decks.push(createFourthDeck(thirdWord, moveToNextPage));
-	decks.push(createFourthDeck(fourthWord, moveToNextPage));
-	decks.push(createFourthDeck(fifthWord, moveToNextPage));
+	decks.push(createFourthDeck(firstWord));
+	decks.push(createFourthDeck(secondWord));
+	decks.push(createFourthDeck(thirdWord));
+	decks.push(createFourthDeck(fourthWord));
+	decks.push(createFourthDeck(fifthWord));
 
 	store.setState({
+		vocab,
 		decksLength: decks.length,
+		totalPossibleGrade: decks.length,
 	});
 	return decks;
 };

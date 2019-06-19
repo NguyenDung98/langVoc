@@ -1,7 +1,7 @@
 import React from "react";
 import {View, StyleSheet, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import {disabledColor, lightGreen, monsterratMedium} from "../constants";
+import {disabledColor, lightGreen, monsterratMedium, red} from "../constants";
 import store from "../store";
 
 export default class Answer extends React.Component {
@@ -10,6 +10,8 @@ export default class Answer extends React.Component {
         submitBtnDisabled: true,
         answer: '',
     };
+
+	input = null;
 
     _onInputFocus = () => {
         this.setState({inputBorderColor: lightGreen});
@@ -27,24 +29,34 @@ export default class Answer extends React.Component {
     };
 
 	_submitAnswer = () => {
-	    const { moveToNextPage, rightAnswer } = this.props;
+	    const { rightAnswer } = this.props;
 	    const { answer } = this.state;
-	    const { badDecks, currentDeck } = store.getState();
+	    const { badDecks, currentDeck, totalPossibleGrade, userGrade, decksLength } = store.getState();
+
+	    this.input.blur();
 
 	    if (answer.trim().toLowerCase() !== rightAnswer.toLowerCase()) {
 		    store.setState({
 			    badDecks: [
 				    ...badDecks,
 				    currentDeck,
-			    ]
+			    ],
+                totalPossibleGrade: totalPossibleGrade + 1,
+			    currentWord: rightAnswer,
+			    showAnswerModal: true,
 		    });
+        } else {
+	        store.setState({
+                userGrade: userGrade + totalPossibleGrade / (decksLength + badDecks.length),
+		        currentWord: rightAnswer,
+		        showAnswerModal: true,
+            })
         }
 
 	    this.setState({
             answer: '',
 		    submitBtnDisabled: true,
         });
-	    moveToNextPage()
     };
 
     render() {
@@ -57,7 +69,8 @@ export default class Answer extends React.Component {
                 <View style={answerStyle}>
                     <View style={[inputContainer, {borderColor: inputBorderColor}]}>
                         <TextInput
-                            placeholder={placeholder}
+                            ref={input => this.input = input}
+	                        placeholder={placeholder}
                             style={inputStyle}
                             onFocus={this._onInputFocus}
                             onBlur={this._onInputBlur}
@@ -73,7 +86,7 @@ export default class Answer extends React.Component {
                         <AntDesign
                             name="caretright"
                             size={35}
-                            color={submitBtnDisabled ? disabledColor : "#ff5a58"}
+                            color={submitBtnDisabled ? disabledColor : red}
                         />
                     </TouchableOpacity>
                 </View>

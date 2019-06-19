@@ -1,8 +1,14 @@
 let state = {
+	// lesson
+	vocab: [],
 	decksLength: 0,
 	badDecks: [],
 	currentDeck: 0,
+	currentWord: '',
 	lessonOver: false,
+	totalPossibleGrade: 1,
+	userGrade: 0,
+	showAnswerModal: false,
 };
 
 let listeners = [];
@@ -12,8 +18,9 @@ export default {
 		return state;
 	},
 	setState(newState) {
+		const oldState = {...state};
 		state = {...state, ...newState};
-		listeners.forEach(listener => listener())
+		listeners.forEach(listener => listener(oldState))
 	},
 	onChange(newListener) {
 		listeners.push(newListener);

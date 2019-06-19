@@ -14,11 +14,18 @@ export default class Content extends React.Component {
 		placeholder: PropTypes.string.isRequired,
 		disableBtn: PropTypes.bool,
 		rightAnswer: PropTypes.string,
-		moveToNextPage: PropTypes.func,
 	};
 
 	render() {
-		const {cardForm, wordForm, guide, hideDefinition, placeholder, disableBtn, rightAnswer, moveToNextPage} = this.props;
+		const {
+			cardForm,
+			wordForm,
+			guide,
+			hideDefinition,
+			placeholder,
+			disableBtn,
+			rightAnswer,
+		} = this.props;
 
 		return (
 			<ScrollView
@@ -36,7 +43,6 @@ export default class Content extends React.Component {
 					placeholder={placeholder}
 					disableBtn={disableBtn}
 					rightAnswer={rightAnswer}
-					moveToNextPage={moveToNextPage}
 				/>
 			</ScrollView>
 		)

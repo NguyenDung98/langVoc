@@ -1,5 +1,7 @@
 import React from "react";
-import {View, StyleSheet, Text, TouchableHighlight, Dimensions} from 'react-native';
+import {View, StyleSheet, ColorPropType, Text, TouchableHighlight} from 'react-native';
+import IconButton from "./IconButton";
+
 import {Ionicons} from '@expo/vector-icons';
 import {Audio} from 'expo';
 
@@ -11,36 +13,49 @@ export default class Word extends React.Component {
     static propTypes = {
         wordForm: WordShape,
         disableBtn: PropTypes.bool,
+        mainColor: ColorPropType.isRequired,
     };
 
     static defaultProps = {
         disableBtn: false,
-        wordForm: null
+        wordForm: null,
     };
 
-	state = {
-		volumeBtnColor: lightGreen,
-		volumeBtnContainerColor: 'white',
-		isPlaying: false
-	};
+	constructor(props) {
+		super(props);
 
-    _onPlaybackStatusUpdate = ({didJustFinish}) => {
+		const color = props.mainColor;
+
+		this.state = {
+			volumeBtnColor: color,
+			volumeBtnContainerColor: 'white',
+			isPlaying: false
+		};
+
+	}
+
+
+	_onPlaybackStatusUpdate = ({didJustFinish}) => {
         if (didJustFinish) {
             this._hideUnderlay();
         }
     };
 
     _showUnderlay = () => {
+        const { mainColor } = this.props;
+
         this.setState({
             isPlaying: true,
             volumeBtnColor: 'white',
-            volumeBtnContainerColor: lightGreen,
+            volumeBtnContainerColor: mainColor,
         });
     };
 
     _hideUnderlay = () => {
-        this.setState({
-            volumeBtnColor: lightGreen,
+	    const { mainColor } = this.props;
+
+	    this.setState({
+            volumeBtnColor: mainColor,
             volumeBtnContainerColor: 'white',
             isPlaying: false
         });
@@ -64,31 +79,32 @@ export default class Word extends React.Component {
         if (!this.props.wordForm) return null;
 
         const {isPlaying, volumeBtnColor, volumeBtnContainerColor} = this.state;
-        const {wordForm: {word, spelling, meaning}, disableBtn} = this.props;
+        const {wordForm: {word, spelling, meaning}, disableBtn, mainColor} = this.props;
         const {container, wordStyle, spellingStyle, meaningStyle, volumeBtnContainer} = styles;
 
         const dynamicBtn = {
             backgroundColor: volumeBtnContainerColor,
-            borderColor: disableBtn ? disabledColor : lightGreen,
+            borderColor: disableBtn ? disabledColor : mainColor,
         };
 
         return (
             <View style={container}>
-                <Text style={wordStyle}>{word}</Text>
+                <Text style={[wordStyle, { color: mainColor }]}>{word}</Text>
                 <Text style={spellingStyle}>{spelling}</Text>
                 <Text style={meaningStyle}>{meaning}</Text>
-                <TouchableHighlight
+                <IconButton
                     style={[volumeBtnContainer, dynamicBtn]}
                     onPress={this._onAudioPlay}
-                    underlayColor={'transparent'}
-                    disabled={disableBtn || isPlaying}
-                >
-                    <Ionicons
-                        name={'md-volume-high'}
-                        size={30}
-                        color={disableBtn ? disabledColor : volumeBtnColor}
-                    />
-                </TouchableHighlight>
+                    buttonProps={{
+                        underlayColor: 'transparent',
+                        disabled: disableBtn || isPlaying,
+                    }}
+                    name={'md-volume-high'}
+                    iconSize={30}
+                    color={disableBtn ? disabledColor : volumeBtnColor}
+                    IconType={Ionicons}
+                    ButtonType={TouchableHighlight}
+                />
             </View>
         )
     }
@@ -104,7 +120,6 @@ const styles = StyleSheet.create({
     wordStyle: {
         fontSize: 30,
         fontFamily: monsterratMedium,
-        color: lightGreen
     },
     spellingStyle: {
         fontSize: 15,
