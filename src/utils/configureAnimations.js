@@ -5,7 +5,7 @@ export const configureAnimations = (emotionScale, emotionRotate) => {
 		Animated.spring(emotionScale, {
 			toValue: 1,
 			bounciness: 20,
-			delay: 600,
+			delay: 100,
 			useNativeDriver: true,
 		}),
 	];

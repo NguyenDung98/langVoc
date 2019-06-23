@@ -1,13 +1,16 @@
 import React from "react";
 import {View, Animated, StyleSheet, Modal, TouchableWithoutFeedback, Text} from 'react-native';
 import Word from "./Word";
+import Button from "./Button";
+
+import {Audio} from 'expo';
+import {FontAwesome, Entypo} from '@expo/vector-icons';
+
+import correctSound from '../../assets/correct.mp3';
+import incorrectSound from '../../assets/incorrect.mp3';
 import store from "../store";
 import {darkGreen, lightGreen, monsterratMedium, red} from "../constants";
-import IconButton from "./IconButton";
-
-import {FontAwesome, Entypo} from '@expo/vector-icons';
 import {configureAnimations} from "../utils";
-
 
 export default class AnswerModal extends React.Component {
 	state = {
@@ -18,36 +21,41 @@ export default class AnswerModal extends React.Component {
 	emotionRotate = new Animated.Value(0);
 
 	componentDidMount() {
-		const { sadAnimations, happyAnimations } = configureAnimations(this.emotionScale, this.emotionRotate);
-
 		this.unsubcribe = store.onChange((prevState) => {
-			const { showAnswerModal, totalPossibleGrade } = store.getState();
-
-			if (showAnswerModal !== prevState.showAnswerModal) {
-				if (showAnswerModal) {
-					if (totalPossibleGrade === prevState.totalPossibleGrade) {
-						this.setState({
-							wrongAnswer: false,
-						}, () => {
-							Animated.sequence(happyAnimations).start();
-						})
-					} else {
-						this.setState({
-							wrongAnswer: true,
-						}, () => {
-							Animated.sequence(sadAnimations).start();
-						})
-					}
-				}
-
-				this.forceUpdate();
-			}
+			this._handleUpdateComponent(prevState);
 		});
 	}
 
 	componentWillUnmount() {
 		this.unsubcribe();
 	}
+
+	_handleUpdateComponent = (prevState) => {
+		const { sadAnimations, happyAnimations } = configureAnimations(this.emotionScale, this.emotionRotate);
+		const { userAnswer, showAnswerModal } = store.getState();
+
+		if (showAnswerModal !== prevState.showAnswerModal) {
+			if (showAnswerModal) {
+				if (userAnswer) {
+					this.setState({
+						wrongAnswer: false,
+					}, async () => {
+						await Audio.Sound.createAsync(correctSound, { shouldPlay: true });
+						Animated.sequence(happyAnimations).start();
+					})
+				} else {
+					this.setState({
+						wrongAnswer: true,
+					}, async () => {
+						await Audio.Sound.createAsync(incorrectSound, { shouldPlay: true });
+						Animated.sequence(sadAnimations).start();
+					})
+				}
+			}
+
+			this.forceUpdate();
+		}
+	};
 
 	_closeModal = () => {
 		const { moveToNextDeck } = this.props;
@@ -97,7 +105,7 @@ export default class AnswerModal extends React.Component {
 								{wrongAnswer ? 'Incorrect!!!' : 'Correct!!!'}
 							</Text>
 						</View>
-						<IconButton
+						<Button
 							name={wrongAnswer ? 'emoji-sad' : 'thumbs-o-up'}
 							IconType={wrongAnswer ? Entypo : FontAwesome}
 							color={wrongAnswer ? red : darkGreen}

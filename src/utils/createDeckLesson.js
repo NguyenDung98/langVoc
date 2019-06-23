@@ -98,6 +98,7 @@ const createFourthDeck = ({ word, image }) => {
 };
 
 export const createDeckLesson = (vocab) => {
+	key = 0;
 	const decks = [];
 	const [firstWord, secondWord, thirdWord, fourthWord, fifthWord] = vocab;
 
@@ -130,6 +131,7 @@ export const createDeckLesson = (vocab) => {
 		vocab,
 		decksLength: decks.length,
 		totalPossibleGrade: decks.length,
+		userGrade: 0,
 	});
 	return decks;
 };

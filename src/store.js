@@ -8,7 +8,9 @@ let state = {
 	lessonOver: false,
 	totalPossibleGrade: 1,
 	userGrade: 0,
+	userAnswer: false,
 	showAnswerModal: false,
+	// review
 };
 
 let listeners = [];

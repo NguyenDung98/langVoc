@@ -7,7 +7,7 @@ import Answer from "./Answer";
 import {WordShape} from "../utils/WordUtils";
 import {lightGreen} from "../constants";
 
-export default function Learning({wordForm, guide, placeholder, disableBtn, rightAnswer, moveToNextPage}) {
+export default function Learning({wordForm, guide, placeholder, disableBtn, rightAnswer}) {
     return (
         <View style={styles.container}>
             <Guide

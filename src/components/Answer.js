@@ -44,12 +44,14 @@ export default class Answer extends React.Component {
                 totalPossibleGrade: totalPossibleGrade + 1,
 			    currentWord: rightAnswer,
 			    showAnswerModal: true,
+			    userAnswer: false,
 		    });
         } else {
 	        store.setState({
                 userGrade: userGrade + totalPossibleGrade / (decksLength + badDecks.length),
 		        currentWord: rightAnswer,
 		        showAnswerModal: true,
+		        userAnswer: true,
             })
         }
 

@@ -44,4 +44,13 @@ module.exports.data = [
 		wordType: 'n',
 		definition: 'A female actor',
 	},
+	{
+		word: 'Time',
+		spelling: '/ˈæk.trəs/',
+		meaning: 'Diễn viên (nữ)',
+		audio: {uri: 'https://dictionary.cambridge.org/media/english/us_pron/u/usc/uscld/uscld01818.mp3'},
+		image: {uri: 'https://unsplash.it/600/600'},
+		wordType: 'n',
+		definition: 'A female actor',
+	},
 ];

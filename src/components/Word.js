@@ -1,11 +1,11 @@
 import React from "react";
 import {View, StyleSheet, ColorPropType, Text, TouchableHighlight} from 'react-native';
-import IconButton from "./IconButton";
+import Button from "./Button";
 
 import {Ionicons} from '@expo/vector-icons';
 import {Audio} from 'expo';
 
-import {disabledColor, lightGreen, monsterratItalic, monsterratMedium, monsterratRegular} from "../constants";
+import {disabledColor, monsterratItalic, monsterratMedium, monsterratRegular} from "../constants";
 import {WordShape} from "../utils/WordUtils";
 import PropTypes from 'prop-types';
 
@@ -31,9 +31,7 @@ export default class Word extends React.Component {
 			volumeBtnContainerColor: 'white',
 			isPlaying: false
 		};
-
 	}
-
 
 	_onPlaybackStatusUpdate = ({didJustFinish}) => {
         if (didJustFinish) {
@@ -68,8 +66,7 @@ export default class Word extends React.Component {
 
         try {
             this._showUnderlay();
-            const {sound} = await Audio.Sound.createAsync(audio, {shouldPlay: true});
-            sound.setOnPlaybackStatusUpdate(this._onPlaybackStatusUpdate);
+            await Audio.Sound.createAsync(audio, { shouldPlay: true }, this._onPlaybackStatusUpdate);
         } catch (e) {
             console.log('Audio error')
         }
@@ -92,7 +89,7 @@ export default class Word extends React.Component {
                 <Text style={[wordStyle, { color: mainColor }]}>{word}</Text>
                 <Text style={spellingStyle}>{spelling}</Text>
                 <Text style={meaningStyle}>{meaning}</Text>
-                <IconButton
+                <Button
                     style={[volumeBtnContainer, dynamicBtn]}
                     onPress={this._onAudioPlay}
                     buttonProps={{

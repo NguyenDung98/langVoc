@@ -1,9 +1,10 @@
 import React from 'react';
-import { Animated, View, TouchableOpacity, ColorPropType, ViewPropTypes } from "react-native";
+import {Animated, View, TouchableOpacity, Text, ColorPropType, ViewPropTypes} from "react-native";
 import PropTypes from 'prop-types';
 
-export default function IconButton({
+export default function Button({
 	style,
+	textStyle,
 	name,
 	iconSize,
 	color,
@@ -12,6 +13,8 @@ export default function IconButton({
 	onPress,
 	buttonProps,
 	animated,
+	title,
+	showIcon,
 }) {
 	const WrapperView = animated ? Animated.View : View;
 
@@ -21,29 +24,35 @@ export default function IconButton({
 			{...buttonProps}
 		>
 			<WrapperView style={style}>
-				<IconType
-					name={name}
-					size={iconSize}
-					color={color}
-				/>
+				{showIcon && (
+					<IconType
+						name={name}
+						size={iconSize}
+						color={color}
+					/>
+				)}
+				{!!title && <Text style={textStyle}>{title}</Text>}
 			</WrapperView>
 		</ButtonType>
 	) : (
 		<View>
 			<ButtonType onPress={onPress} {...buttonProps}>
 				<WrapperView style={style}>
-					<IconType
-						name={name}
-						size={iconSize}
-						color={color}
-					/>
+					{showIcon && (
+						<IconType
+							name={name}
+							size={iconSize}
+							color={color}
+						/>
+					)}
+					{!!title && <Text style={textStyle}>{title}</Text>}
 				</WrapperView>
 			</ButtonType>
 		</View>
 	)
 }
 
-IconButton.propTypes = {
+Button.propTypes = {
 	style: ViewPropTypes.style,
 	name: PropTypes.string,
 	iconSize: PropTypes.number,
@@ -51,9 +60,15 @@ IconButton.propTypes = {
 	IconType: PropTypes.any,
 	ButtonType: PropTypes.any,
 	onPress: PropTypes.func,
+	animated: PropTypes.bool,
+	title: PropTypes.string,
+	showIcon: PropTypes.bool,
 };
 
-IconButton.defaultProps = {
+Button.defaultProps = {
 	ButtonType: TouchableOpacity,
-	onPress: () => { },
+	onPress: () => {},
+	animated: false,
+	title: '',
+	showIcon: true,
 };
