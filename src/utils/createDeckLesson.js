@@ -37,7 +37,7 @@ const createSecondDeck = ({ word, spelling, meaning, audio, image }) => {
 	return (
 		<View style={{flex: 1}} key={getKey()}>
 			<Content
-				guide={'Bạn đoán xem từ này là gì?'}
+				guide={'Theo gợi ý trên thì từ này là gì?'}
 				cardForm={createCard({
 					image,
 				})}
@@ -59,7 +59,7 @@ const createThirdDeck = ({ word, meaning, audio, image }) => {
 	return (
 		<View style={{flex: 1}} key={getKey()}>
 			<Content
-				guide={'Bạn đoán xem từ này là gì?'}
+				guide={'Theo gợi ý trên thì từ này là gì?'}
 				cardForm={createCard({
 					image,
 				})}
@@ -77,11 +77,11 @@ const createThirdDeck = ({ word, meaning, audio, image }) => {
 	)
 };
 
-const createFourthDeck = ({ word, image }) => {
+export const createFourthDeck = ({ word, image }) => {
 	return (
 		<View style={{flex: 1}} key={getKey()}>
 			<Content
-				guide={'Bạn đoán xem từ này là gì?'}
+				guide={'Theo gợi ý trên thì từ này là gì?'}
 				cardForm={createCard({
 					image,
 				})}
@@ -129,9 +129,12 @@ export const createDeckLesson = (vocab) => {
 
 	store.setState({
 		vocab,
-		decksLength: decks.length,
+		decksLeft: data.length,
 		totalPossibleGrade: decks.length,
 		userGrade: 0,
+		lessonOver: false,
+		currentDeck: 0,
+		badDecks: [],
 	});
 	return decks;
 };

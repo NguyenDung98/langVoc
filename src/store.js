@@ -2,15 +2,18 @@ let state = {
 	// lesson
 	vocab: [],
 	decksLength: 0,
+	decksLeft: 0,
 	badDecks: [],
 	currentDeck: 0,
 	currentWord: '',
 	lessonOver: false,
 	totalPossibleGrade: 1,
 	userGrade: 0,
+
 	userAnswer: false,
 	showAnswerModal: false,
 	// review
+	multipleChoiceGrade: 0,
 };
 
 let listeners = [];

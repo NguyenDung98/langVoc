@@ -33,7 +33,7 @@ export default class Options extends React.Component {
 
 	_handleChooseAnswer = async (option) => {
 		const { chosenAnswer } = this.state;
-		const { userGrade } = store.getState();
+		const { userGrade, multipleChoiceGrade } = store.getState();
 		const { moveToNextQuestion, rightAnswer: {word} } = this.props;
 
 		if (chosenAnswer) return;
@@ -45,6 +45,11 @@ export default class Options extends React.Component {
 				textColor: 'white',
 				showAnswerEffect: true,
 				chosenAnswer: option,
+			}, async () => {
+				store.setState({
+					multipleChoiceGrade: multipleChoiceGrade + 1,
+					userGrade: userGrade + 1,
+				});
 			});
 			await Audio.Sound.createAsync(correctSound, { shouldPlay: true });
 		} else {
@@ -54,13 +59,14 @@ export default class Options extends React.Component {
 				textColor: 'white',
 				showAnswerEffect: true,
 				chosenAnswer: option,
+			}, async () => {
+				store.setState({
+					userGrade: userGrade + 1,
+				});
+				await Audio.Sound.createAsync(incorrectSound, { shouldPlay: true });
 			});
-			await Audio.Sound.createAsync(incorrectSound, { shouldPlay: true });
 		}
 
-		store.setState({
-			userGrade: userGrade + 1,
-		});
 		setTimeout(moveToNextQuestion, 1000);
 	};
 

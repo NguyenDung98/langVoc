@@ -37,12 +37,12 @@ const shuffle = (a) => {
 	return arrCopy;
 };
 
-export const createOptionsReview = (data, moveToNextQuestion) => {
+export const createMultipleChoiceReview = (data, moveToNextQuestion) => {
 	key = 0;
 	store.setState({
-		vocab: data,
 		totalPossibleGrade: data.length,
 		userGrade: 0,
+		multipleChoiceGrade: 0,
 	});
 
 	return data.map((word, index) => {

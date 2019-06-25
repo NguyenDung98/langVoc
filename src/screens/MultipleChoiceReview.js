@@ -4,7 +4,7 @@ import ProgressBar from "../components/ProgressBar";
 import StatusBar from "../components/StatusBar";
 
 import {ViewPager} from "rn-viewpager";
-import {createOptionsReview} from "../utils/createOptionsReview";
+import {createMultipleChoiceReview} from "../utils/";
 
 import {data} from '../constants/index';
 import store from "../store";
@@ -20,8 +20,18 @@ export default class MultipleChoiceReview extends React.Component {
 		const { userGrade, totalPossibleGrade } = store.getState();
 
 		if (userGrade < totalPossibleGrade) {
-			this.viewPager.setPage(userGrade);
+			return this.viewPager.setPage(userGrade);
 		}
+
+		this._endReview()
+	};
+
+	_endReview = () => {
+		const { navigation: {goBack} } = this.props;
+		const { multipleChoiceGrade, totalPossibleGrade } = store.getState();
+
+		alert(`Bạn đạt được  ${multipleChoiceGrade} / ${totalPossibleGrade} điểm`);
+		goBack();
 	};
 
 	render() {
@@ -36,7 +46,7 @@ export default class MultipleChoiceReview extends React.Component {
 					style={styles.container}
 					horizontalScroll={false}
 				>
-					{createOptionsReview(data, this._moveToNextQuestion)}
+					{createMultipleChoiceReview(data, this._moveToNextQuestion)}
 				</ViewPager>
 			</View>
 		)

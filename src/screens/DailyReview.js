@@ -1,18 +1,14 @@
-import React, {Component} from "react";
-import {
-	StyleSheet,
-	KeyboardAvoidingView,
-} from "react-native";
+import React from 'react';
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
 import StatusBar from "../components/StatusBar";
 import ProgressBar from "../components/ProgressBar";
 import {ViewPager} from "rn-viewpager";
-import AnswerModal from "../components/AnswerModal";
-
+import {createDailyReview} from "../utils";
 import {data} from "../constants";
-import {createDeckLesson} from "../utils";
+import AnswerModal from "../components/AnswerModal";
 import store from "../store";
 
-export default class Learning extends Component {
+export default class DailyReview extends React.Component {
 	static navigationOptions = {
 		header: null,
 	};
@@ -58,11 +54,9 @@ export default class Learning extends Component {
 	};
 
 	render() {
-		const { container } = styles;
-
 		return (
 			<KeyboardAvoidingView
-				style={container}
+				style={styles.container}
 				behavior={'padding'}
 				enabled
 			>
@@ -72,16 +66,16 @@ export default class Learning extends Component {
 				/>
 				<ViewPager
 					ref={viewPager => this.viewPager = viewPager}
-					style={container}
+					style={styles.container}
 					horizontalScroll={false}
 				>
-					{createDeckLesson(data)}
+					{createDailyReview(data)}
 				</ViewPager>
 				<AnswerModal
 					moveToNextDeck={this._moveToNextDeck}
 				/>
 			</KeyboardAvoidingView>
-		);
+		)
 	}
 }
 

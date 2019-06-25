@@ -31,7 +31,7 @@ export default class Answer extends React.Component {
 	_submitAnswer = () => {
 	    const { rightAnswer } = this.props;
 	    const { answer } = this.state;
-	    const { badDecks, currentDeck, totalPossibleGrade, userGrade, decksLength } = store.getState();
+	    const { badDecks, currentDeck, totalPossibleGrade, vocab, userGrade, decksLeft } = store.getState();
 
 	    this.input.blur();
 
@@ -47,8 +47,12 @@ export default class Answer extends React.Component {
 			    userAnswer: false,
 		    });
         } else {
-	        store.setState({
-                userGrade: userGrade + totalPossibleGrade / (decksLength + badDecks.length),
+	    	const newUserGrade = (1 / vocab.length) * totalPossibleGrade;
+	    	const leftOver = (totalPossibleGrade - (userGrade + newUserGrade * decksLeft)) / decksLeft;
+
+		    store.setState({
+                userGrade: userGrade + newUserGrade + leftOver,
+			    decksLeft: decksLeft - 1,
 		        currentWord: rightAnswer,
 		        showAnswerModal: true,
 		        userAnswer: true,
@@ -78,6 +82,8 @@ export default class Answer extends React.Component {
                             onBlur={this._onInputBlur}
                             onChangeText={this._onChangeText}
                             value={answer}
+                            autoCorrect={false}
+                            autoCompleteType={'off'}
                         />
                     </View>
                     <TouchableOpacity
