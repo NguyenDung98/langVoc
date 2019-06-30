@@ -5,7 +5,7 @@ import Button from "./Button";
 import {Ionicons} from '@expo/vector-icons';
 import {Audio} from 'expo';
 
-import {disabledColor, monsterratItalic, monsterratMedium, monsterratRegular} from "../constants";
+import {DISABLED_COLOR, MONSTERRAT_ITALIC, MONSTERRAT_MEDIUM, MONSTERRAT_REGULAR} from "../constants";
 import {WordShape} from "../utils/WordUtils";
 import PropTypes from 'prop-types';
 
@@ -81,7 +81,7 @@ export default class Word extends React.Component {
 
         const dynamicBtn = {
             backgroundColor: volumeBtnContainerColor,
-            borderColor: disableBtn ? disabledColor : mainColor,
+            borderColor: disableBtn ? DISABLED_COLOR : mainColor,
         };
 
         return (
@@ -98,7 +98,7 @@ export default class Word extends React.Component {
                     }}
                     name={'md-volume-high'}
                     iconSize={30}
-                    color={disableBtn ? disabledColor : volumeBtnColor}
+                    color={disableBtn ? DISABLED_COLOR : volumeBtnColor}
                     IconType={Ionicons}
                     ButtonType={TouchableHighlight}
                 />
@@ -116,16 +116,16 @@ const styles = StyleSheet.create({
     },
     wordStyle: {
         fontSize: 30,
-        fontFamily: monsterratMedium,
+        fontFamily: MONSTERRAT_MEDIUM,
     },
     spellingStyle: {
         fontSize: 15,
-        fontFamily: monsterratItalic,
+        fontFamily: MONSTERRAT_ITALIC,
         color: '#818181'
     },
     meaningStyle: {
         fontSize: 17,
-        fontFamily: monsterratRegular,
+        fontFamily: MONSTERRAT_REGULAR,
     },
     volumeBtnContainer: {
         height: 45,

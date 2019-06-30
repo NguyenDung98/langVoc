@@ -1,12 +1,12 @@
 import React from "react";
 import {View, StyleSheet, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import {disabledColor, lightGreen, monsterratMedium, red} from "../constants";
+import {DISABLED_COLOR, LIGHT_GREEN, MONSTERRAT_MEDIUM, RED} from "../constants";
 import store from "../store";
 
 export default class Answer extends React.Component {
     state = {
-        inputBorderColor: disabledColor,
+        inputBorderColor: DISABLED_COLOR,
         submitBtnDisabled: true,
         answer: '',
     };
@@ -14,11 +14,11 @@ export default class Answer extends React.Component {
 	input = null;
 
     _onInputFocus = () => {
-        this.setState({inputBorderColor: lightGreen});
+        this.setState({inputBorderColor: LIGHT_GREEN});
     };
 
     _onInputBlur = () => {
-        this.setState({inputBorderColor: disabledColor})
+        this.setState({inputBorderColor: DISABLED_COLOR})
     };
 
     _onChangeText = answer => {
@@ -94,7 +94,7 @@ export default class Answer extends React.Component {
                         <AntDesign
                             name="caretright"
                             size={35}
-                            color={submitBtnDisabled ? disabledColor : red}
+                            color={submitBtnDisabled ? DISABLED_COLOR : RED}
                         />
                     </TouchableOpacity>
                 </View>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     inputStyle: {
         fontSize: 20,
-        fontFamily: monsterratMedium
+        fontFamily: MONSTERRAT_MEDIUM
     },
     checkBtnContainer: {
         width: 50,

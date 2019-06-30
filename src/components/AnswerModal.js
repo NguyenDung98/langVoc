@@ -9,7 +9,7 @@ import {FontAwesome, Entypo} from '@expo/vector-icons';
 import correctSound from '../../assets/correct.mp3';
 import incorrectSound from '../../assets/incorrect.mp3';
 import store from "../store";
-import {darkGreen, lightGreen, monsterratMedium, red} from "../constants";
+import {DARK_GREEN, LIGHT_GREEN, MONSTERRAT_MEDIUM, RED} from "../constants";
 import {configureAnimations} from "../utils";
 
 export default class AnswerModal extends React.Component {
@@ -86,7 +86,7 @@ export default class AnswerModal extends React.Component {
 
 		const { word, spelling, meaning, audio } = currentVocab;
 		const { container, word: wordStyle, notifiedViewContainer, notifiedText, motionIcon } = styles;
-		const backgroundColor = { backgroundColor: wrongAnswer ? red : lightGreen};
+		const backgroundColor = { backgroundColor: wrongAnswer ? RED : LIGHT_GREEN};
 
 		return (
 			<Modal
@@ -108,7 +108,7 @@ export default class AnswerModal extends React.Component {
 						<Button
 							name={wrongAnswer ? 'emoji-sad' : 'thumbs-o-up'}
 							IconType={wrongAnswer ? Entypo : FontAwesome}
-							color={wrongAnswer ? red : darkGreen}
+							color={wrongAnswer ? RED : DARK_GREEN}
 							iconSize={35}
 							style={[motionIcon, this._getEmotionStyle()]}
 							animated
@@ -116,7 +116,7 @@ export default class AnswerModal extends React.Component {
 						/>
 						<Word
 							wordForm={{ word, spelling, meaning, audio }}
-							mainColor={wrongAnswer ? red : lightGreen}
+							mainColor={wrongAnswer ? RED : LIGHT_GREEN}
 						/>
 					</View>
 					<TouchableWithoutFeedback onPress={this._closeModal}>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
 		height: 40,
 	},
 	notifiedText: {
-		fontFamily: monsterratMedium,
+		fontFamily: MONSTERRAT_MEDIUM,
 		fontSize: 20,
 		color: 'white',
 	},

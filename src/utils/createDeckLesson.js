@@ -129,7 +129,7 @@ export const createDeckLesson = (vocab) => {
 
 	store.setState({
 		vocab,
-		decksLeft: data.length,
+		decksLeft: decks.length,
 		totalPossibleGrade: decks.length,
 		userGrade: 0,
 		lessonOver: false,

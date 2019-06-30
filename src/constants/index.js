@@ -1,13 +1,13 @@
 // color
-export const lightGreen = '#04d78a';
-export const darkGreen = '#037d50';
-export const red = '#ff5a58';
-export const disabledColor = '#c6c6c6';
-export const lightGrey = '#e6e6e6';
+export const LIGHT_GREEN = '#04d78a';
+export const DARK_GREEN = '#037d50';
+export const RED = '#ff5a58';
+export const DISABLED_COLOR = '#c6c6c6';
+export const LIGHT_GREY = '#e6e6e6';
 // fontFamily
-export const monsterratRegular = 'monsterrat-regular';
-export const monsterratMedium = 'monsterrat-medium';
-export const monsterratMediumItalic = 'monsterrat-medium-italic';
-export const monsterratItalic = 'monsterrat-italic';
+export const MONSTERRAT_REGULAR = 'monsterrat-regular';
+export const MONSTERRAT_MEDIUM = 'monsterrat-medium';
+export const MONSTERRAT_MEDIUM_ITALIC = 'monsterrat-medium-italic';
+export const MONSTERRAT_ITALIC = 'monsterrat-italic';
 
 export * from './data';

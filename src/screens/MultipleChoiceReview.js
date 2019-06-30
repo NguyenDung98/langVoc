@@ -27,11 +27,11 @@ export default class MultipleChoiceReview extends React.Component {
 	};
 
 	_endReview = () => {
-		const { navigation: {goBack} } = this.props;
+		const { navigation: {replace} } = this.props;
 		const { multipleChoiceGrade, totalPossibleGrade } = store.getState();
 
 		alert(`Bạn đạt được  ${multipleChoiceGrade} / ${totalPossibleGrade} điểm`);
-		goBack();
+		replace('WordList')
 	};
 
 	render() {

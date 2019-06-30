@@ -42,10 +42,11 @@ export default class DailyReview extends React.Component {
 	};
 
 	_endLesson = (finished) => {
-		const { navigation: {goBack} } = this.props;
+		const { navigation: {goBack, replace} } = this.props;
 
 		if (finished) {
 			alert(`Chúc mừng bạn đã hoàn thành bài học ^^`);
+			replace('WordList')
 		} else {
 			alert('Bạn gõ sai quá nhiều, bắt đầu lại nhé!')
 		}

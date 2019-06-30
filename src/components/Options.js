@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 import {Audio} from "expo";
 
-import {disabledColor, lightGreen, monsterratRegular, red} from "../constants";
+import {DISABLED_COLOR, LIGHT_GREEN, MONSTERRAT_REGULAR, RED} from "../constants";
 import {CardShape, WordShape} from "../utils";
 import store from "../store";
 
@@ -25,7 +25,7 @@ export default class Options extends React.Component {
 
 	state = {
 		rightAnswerBackgroundColor: 'transparent',
-		rightAnswerBorderColor: disabledColor,
+		rightAnswerBorderColor: DISABLED_COLOR,
 		textColor: 'black',
 		showAnswerEffect: false,
 		chosenAnswer: '',
@@ -40,8 +40,8 @@ export default class Options extends React.Component {
 
 		if (option.toLowerCase() === word.toLowerCase()) {
 			this.setState({
-				rightAnswerBackgroundColor: lightGreen,
-				rightAnswerBorderColor: lightGreen,
+				rightAnswerBackgroundColor: LIGHT_GREEN,
+				rightAnswerBorderColor: LIGHT_GREEN,
 				textColor: 'white',
 				showAnswerEffect: true,
 				chosenAnswer: option,
@@ -54,8 +54,8 @@ export default class Options extends React.Component {
 			await Audio.Sound.createAsync(correctSound, { shouldPlay: true });
 		} else {
 			this.setState({
-				rightAnswerBackgroundColor: red,
-				rightAnswerBorderColor: red,
+				rightAnswerBackgroundColor: RED,
+				rightAnswerBorderColor: RED,
 				textColor: 'white',
 				showAnswerEffect: true,
 				chosenAnswer: option,
@@ -125,12 +125,12 @@ const styles = StyleSheet.create({
 	},
 	optionStyle: {
 		borderWidth: 2,
-		borderColor: disabledColor,
+		borderColor: DISABLED_COLOR,
 		borderRadius: 10,
 		padding: 13,
 	},
 	optionTextStyle: {
-		fontFamily: monsterratRegular,
+		fontFamily: MONSTERRAT_REGULAR,
 		fontSize: 18,
 		textAlign: 'center',
 	},

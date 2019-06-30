@@ -5,7 +5,7 @@ import Guide from "./Guide";
 import Word from "./Word";
 import Answer from "./Answer";
 import {WordShape} from "../utils/WordUtils";
-import {lightGreen} from "../constants";
+import {LIGHT_GREEN} from "../constants";
 
 export default function Learning({wordForm, guide, placeholder, disableBtn, rightAnswer}) {
     return (
@@ -16,7 +16,7 @@ export default function Learning({wordForm, guide, placeholder, disableBtn, righ
             <Word
                 wordForm={wordForm}
                 disableBtn={disableBtn}
-                mainColor={lightGreen}
+                mainColor={LIGHT_GREEN}
             />
             <Answer
                 placeholder={placeholder}

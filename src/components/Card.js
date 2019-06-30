@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Text, TouchableWithoutFeedback, Dimensions, StyleSheet, View, Image} from 'react-native';
-import {lightGreen, monsterratMedium, monsterratMediumItalic} from "../constants";
+import {LIGHT_GREEN, MONSTERRAT_MEDIUM, MONSTERRAT_MEDIUM_ITALIC} from "../constants";
 import {CardShape} from "../utils/CardUtils";
 import PropTypes from 'prop-types';
 
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 150 * 0.05,
         borderWidth: 1,
-        borderColor: lightGreen
+        borderColor: LIGHT_GREEN
     },
     textContainerStyle: {
         flexDirection: 'row',
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
     },
     wordTypeStyle: {
         color: 'grey',
-        fontFamily: monsterratMediumItalic,
+        fontFamily: MONSTERRAT_MEDIUM_ITALIC,
         textAlign: 'center',
         fontSize: 16
     },
-    definitionStyle: {
+    definitionText: {
         fontStyle: 'normal',
-        fontFamily: monsterratMedium,
+        fontFamily: MONSTERRAT_MEDIUM,
         color: 'black'
     }
 });

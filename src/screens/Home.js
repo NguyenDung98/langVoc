@@ -7,6 +7,7 @@ export default class Home extends React.Component {
 
 		return (
 			<View style={{flex: 1, justifyContent: 'space-evenly'}}>
+				<Button title={'WordList'} onPress={() => navigate('WordList')}/>
 				<Button title={'Learning'} onPress={() => navigate('Learning')}/>
 				<Button title={'Daily Review'} onPress={() => navigate('DailyReview')}/>
 				<Button title={'Multiple Choice Review'} onPress={() => navigate('MultipleChoiceReview')}/>
