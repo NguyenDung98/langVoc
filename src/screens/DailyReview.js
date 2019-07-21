@@ -7,6 +7,7 @@ import {createDailyReview} from "../utils";
 import {data} from "../constants";
 import AnswerModal from "../components/AnswerModal";
 import store from "../store";
+import {updateWordReviewCalendar} from "../helpers";
 
 export default class DailyReview extends React.Component {
 	static navigationOptions = {
@@ -29,10 +30,11 @@ export default class DailyReview extends React.Component {
 
 			this.viewPager.setPage(index);
 		} else if (badDecks.length) {
-			index = badDecks.shift();
+			index = badDecks.slice().shift();
 			store.setState({
 				currentDeck: index,
 				lessonOver: true,
+				badDecks: badDecks.filter((_, i) => i !== index),
 			});
 
 			this.viewPager.setPageWithoutAnimation(index);
@@ -45,6 +47,7 @@ export default class DailyReview extends React.Component {
 		const { navigation: {goBack, replace} } = this.props;
 
 		if (finished) {
+			updateWordReviewCalendar();
 			alert(`Chúc mừng bạn đã hoàn thành bài học ^^`);
 			replace('WordList')
 		} else {
@@ -69,6 +72,7 @@ export default class DailyReview extends React.Component {
 					ref={viewPager => this.viewPager = viewPager}
 					style={styles.container}
 					horizontalScroll={false}
+					scrollEnabled={false}
 				>
 					{createDailyReview(data)}
 				</ViewPager>

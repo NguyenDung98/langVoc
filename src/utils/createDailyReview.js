@@ -3,10 +3,12 @@ import store from "../store";
 
 export const createDailyReview = (data) => {
 	store.setState({
-		userGrade: 0,
+		vocab: data, // số từ cần được ôn tập
+		mode: 'reviewing',
 		totalPossibleGrade: data.length,
 		decksLeft: data.length,
-		vocab: data,
+
+		userGrade: 0,
 		lessonOver: false,
 		currentDeck: 0,
 		badDecks: [],

@@ -1,5 +1,6 @@
 module.exports.data = [
 	{
+		id: 0,
 		word: 'Actor',
 		spelling: '/ˈæk.tɚ/',
 		meaning: 'Diễn viên (nam)',
@@ -7,8 +8,14 @@ module.exports.data = [
 		image: {uri: 'https://unsplash.it/600/600'},
 		wordType: 'n',
 		definition: 'Someone who pretends to be someone else while performing in a film, play, or television or radio programme',
+		reviewTimes: 0,
+		reviewDate: new Date(),  // number
+		totalPossibleGrade: 0,
+		multipleChoiceGrade: 0,
+		priority: 2,
 	},
 	{
+		id: 1,
 		word: 'Actress',
 		spelling: '/ˈæk.trəs/',
 		meaning: 'Diễn viên (nữ)',
@@ -16,8 +23,15 @@ module.exports.data = [
 		image: {uri: 'https://unsplash.it/600/600'},
 		wordType: 'n',
 		definition: 'A female actor',
+		//
+		reviewTimes: 0,
+		reviewDate: new Date(),  // number
+		totalPossibleGrade: 0,
+		multipleChoiceGrade: 0,
+		priority: 1,
 	},
 	{
+		id: 2,
 		word: 'Thorn',
 		spelling: '/ˈæk.trəs/',
 		meaning: 'Diễn viên (nữ)',
@@ -25,8 +39,14 @@ module.exports.data = [
 		image: {uri: 'https://unsplash.it/600/600'},
 		wordType: 'n',
 		definition: 'A female actor',
+		reviewTimes: 0,
+		reviewDate: new Date(),  // number
+		totalPossibleGrade: 0,
+		multipleChoiceGrade: 0,
+		priority: 3,
 	},
 	{
+		id: 3,
 		word: 'King',
 		spelling: '/ˈæk.trəs/',
 		meaning: 'Diễn viên (nữ)',
@@ -34,8 +54,14 @@ module.exports.data = [
 		image: {uri: 'https://unsplash.it/600/600'},
 		wordType: 'n',
 		definition: 'A female actor',
+		reviewTimes: 0,
+		reviewDate: new Date(),  // number
+		totalPossibleGrade: 0,
+		multipleChoiceGrade: 0,
+		priority: 2,
 	},
 	{
+		id: 4,
 		word: 'Vessel',
 		spelling: '/ˈæk.trəs/',
 		meaning: 'Diễn viên (nữ)',
@@ -43,8 +69,14 @@ module.exports.data = [
 		image: {uri: 'https://unsplash.it/600/600'},
 		wordType: 'n',
 		definition: 'A female actor',
+		reviewTimes: 0,
+		reviewDate: new Date(),  // number
+		totalPossibleGrade: 0,
+		multipleChoiceGrade: 0,
+		priority: 2,
 	},
 	{
+		id: 5,
 		word: 'Time',
 		spelling: '/ˈæk.trəs/',
 		meaning: 'Diễn viên (nữ)',
@@ -52,5 +84,10 @@ module.exports.data = [
 		image: {uri: 'https://unsplash.it/600/600'},
 		wordType: 'n',
 		definition: 'A female actor',
+		reviewTimes: 0,
+		reviewDate: new Date(),  // number
+		totalPossibleGrade: 0,
+		multipleChoiceGrade: 0,
+		priority: 1,
 	},
 ];

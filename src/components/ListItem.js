@@ -135,7 +135,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	moreBtnStyle: {
-		width: 30,
+		padding: 5,
+		width: 40,
 		alignItems: 'center',
 	}
 });

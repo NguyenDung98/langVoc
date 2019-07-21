@@ -11,6 +11,7 @@ import AnswerModal from "../components/AnswerModal";
 import {data} from "../constants";
 import {createDeckLesson} from "../utils";
 import store from "../store";
+import {updateWordReviewCalendar} from "../helpers";
 
 export default class Learning extends Component {
 	static navigationOptions = {
@@ -33,10 +34,11 @@ export default class Learning extends Component {
 
 			this.viewPager.setPage(index);
 		} else if (badDecks.length) {
-			index = badDecks.shift();
+			index = badDecks.slice().shift();
 			store.setState({
 				currentDeck: index,
 				lessonOver: true,
+				badDecks: badDecks.filter((_, i) => i !== index),
 			});
 
 			this.viewPager.setPageWithoutAnimation(index);
@@ -49,13 +51,13 @@ export default class Learning extends Component {
 		const { navigation: {goBack, replace} } = this.props;
 
 		if (finished) {
+			updateWordReviewCalendar();
 			alert(`Chúc mừng bạn đã hoàn thành bài học ^^`);
 			replace('WordList')
 		} else {
-			alert('Bạn gõ sai quá nhiều, bắt đầu lại nhé!')
+			alert('Bạn gõ sai quá nhiều, bắt đầu lại nhé!');
+			goBack();
 		}
-
-		goBack();
 	};
 
 	render() {
@@ -75,6 +77,7 @@ export default class Learning extends Component {
 					ref={viewPager => this.viewPager = viewPager}
 					style={container}
 					horizontalScroll={false}
+					scrollEnabled={false}
 				>
 					{createDeckLesson(data)}
 				</ViewPager>

@@ -109,7 +109,7 @@ export default class Word extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-	    flex: 1,
+	    flex: 3,
 	    alignItems: 'center',
 	    justifyContent: 'space-evenly',
 	    marginBottom: 10,

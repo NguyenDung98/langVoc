@@ -128,7 +128,9 @@ export const createDeckLesson = (vocab) => {
 	decks.push(createFourthDeck(fifthWord));
 
 	store.setState({
-		vocab,
+		vocab, // số từ cần học
+
+		mode: 'learning',
 		decksLeft: decks.length,
 		totalPossibleGrade: decks.length,
 		userGrade: 0,

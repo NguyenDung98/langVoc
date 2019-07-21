@@ -14,7 +14,7 @@ import store from "../store";
 import correctSound from "../../assets/correct.mp3";
 import incorrectSound from '../../assets/incorrect.mp3';
 
-export default class Options extends React.Component {
+export default class Choices extends React.Component {
 	static propTypes = {
 		cardForm: CardShape.isRequired,
 		rightAnswer: WordShape.isRequired,
@@ -47,11 +47,11 @@ export default class Options extends React.Component {
 				chosenAnswer: option,
 			}, async () => {
 				store.setState({
-					multipleChoiceGrade: multipleChoiceGrade + 1,
+					multipleChoiceGrade: [...multipleChoiceGrade, true],
 					userGrade: userGrade + 1,
 				});
+				await Audio.Sound.createAsync(correctSound, { shouldPlay: true });
 			});
-			await Audio.Sound.createAsync(correctSound, { shouldPlay: true });
 		} else {
 			this.setState({
 				rightAnswerBackgroundColor: RED,
@@ -61,6 +61,7 @@ export default class Options extends React.Component {
 				chosenAnswer: option,
 			}, async () => {
 				store.setState({
+					multipleChoiceGrade: [...multipleChoiceGrade, false],
 					userGrade: userGrade + 1,
 				});
 				await Audio.Sound.createAsync(incorrectSound, { shouldPlay: true });

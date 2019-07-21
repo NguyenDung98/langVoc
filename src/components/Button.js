@@ -15,6 +15,7 @@ export default function Button({
 	animated,
 	title,
 	showIcon,
+	children
 }) {
 	const WrapperView = animated ? Animated.View : View;
 
@@ -32,6 +33,7 @@ export default function Button({
 					/>
 				)}
 				{!!title && <Text style={textStyle}>{title}</Text>}
+				{children}
 			</WrapperView>
 		</ButtonType>
 	) : (
@@ -46,6 +48,7 @@ export default function Button({
 						/>
 					)}
 					{!!title && <Text style={textStyle}>{title}</Text>}
+					{children}
 				</WrapperView>
 			</ButtonType>
 		</View>

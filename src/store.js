@@ -1,7 +1,7 @@
 let state = {
 	// lesson
+	mode: '',
 	vocab: [],
-	decksLength: 0,
 	decksLeft: 0,
 	badDecks: [],
 	currentDeck: 0,
@@ -13,7 +13,7 @@ let state = {
 	userAnswer: false,
 	showAnswerModal: false,
 	// review
-	multipleChoiceGrade: 0,
+	multipleChoiceGrade: [],
 };
 
 let listeners = [];

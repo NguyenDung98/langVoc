@@ -8,6 +8,7 @@ import {createMultipleChoiceReview} from "../utils/";
 
 import {data} from '../constants/index';
 import store from "../store";
+import {updateWordMultipleChoice} from "../helpers";
 
 export default class MultipleChoiceReview extends React.Component {
 	static navigationOptions = {
@@ -30,7 +31,8 @@ export default class MultipleChoiceReview extends React.Component {
 		const { navigation: {replace} } = this.props;
 		const { multipleChoiceGrade, totalPossibleGrade } = store.getState();
 
-		alert(`Bạn đạt được  ${multipleChoiceGrade} / ${totalPossibleGrade} điểm`);
+		updateWordMultipleChoice();
+		alert(`Bạn đạt được  ${multipleChoiceGrade.filter(answer => answer).length} / ${totalPossibleGrade} điểm`);
 		replace('WordList')
 	};
 
@@ -45,8 +47,9 @@ export default class MultipleChoiceReview extends React.Component {
 					ref={viewPager => this.viewPager = viewPager}
 					style={styles.container}
 					horizontalScroll={false}
+					scrollEnabled={false}
 				>
-					{createMultipleChoiceReview(data, this._moveToNextQuestion)}
+					{createMultipleChoiceReview(6, data, this._moveToNextQuestion)}
 				</ViewPager>
 			</View>
 		)

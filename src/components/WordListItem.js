@@ -3,12 +3,14 @@ import {
 	LayoutAnimation,
 	StyleSheet,
 	Text,
-	TouchableHighlight,
 	TouchableWithoutFeedback,
 	UIManager,
-	View
+	View,
+	TouchableOpacity
 } from 'react-native';
 import ListItem from "./ListItem";
+import { Audio } from 'expo';
+
 import {LIGHT_GREEN, MONSTERRAT_MEDIUM_ITALIC, MONSTERRAT_REGULAR} from "../constants";
 
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -16,21 +18,44 @@ UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationE
 export default class WordListItem extends React.Component {
 	state = {
 		showDefinition: false,
+		playingSound: false,
 	};
-
-	componentWillUpdate() {
-		LayoutAnimation.easeInEaseOut();
-	}
 
 	_toggleDefinition = () => {
 		const { showDefinition } = this.state;
 
+		LayoutAnimation.easeInEaseOut();
 		this.setState({ showDefinition: !showDefinition });
+	};
+
+	_onPlaybackStatusUpdate = ({ didJustFinish }) => {
+		if (didJustFinish) {
+			this.setState({
+				playingSound: false,
+			})
+		}
+	};
+
+	_playSound = () => {
+		const { audio } = this.props.word;
+		const { playingSound } = this.state;
+
+		if (!audio || playingSound) return;
+
+		try {
+			this.setState({
+				playingSound: true,
+			}, async () => {
+				await Audio.Sound.createAsync(audio, { shouldPlay: true }, this._onPlaybackStatusUpdate);
+			});
+		} catch (e) {
+			console.log('Audio error')
+		}
 	};
 
 	render() {
 		const {word: {image, word, meaning, wordType, definition}} = this.props;
-		const { showDefinition } = this.state;
+		const { showDefinition, playingSound } = this.state;
 
 		return (
 			<TouchableWithoutFeedback onPress={this._toggleDefinition}>
@@ -44,8 +69,12 @@ export default class WordListItem extends React.Component {
 						subTitle={meaning}
 						subTitleColor={'grey'}
 						buttonIconName={'md-volume-high'}
-						buttonType={TouchableHighlight}
+						buttonType={TouchableOpacity}
 						buttonColor={LIGHT_GREEN}
+						buttonProps={{
+							disabled: playingSound,
+						}}
+						onButtonPress={this._playSound}
 					/>
 					{showDefinition && (
 						<View style={styles.definitionContainer}>

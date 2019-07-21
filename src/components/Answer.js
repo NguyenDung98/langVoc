@@ -31,12 +31,22 @@ export default class Answer extends React.Component {
 	_submitAnswer = () => {
 	    const { rightAnswer } = this.props;
 	    const { answer } = this.state;
-	    const { badDecks, currentDeck, totalPossibleGrade, vocab, userGrade, decksLeft } = store.getState();
+	    const { mode, badDecks, currentDeck, totalPossibleGrade, vocab, userGrade, decksLeft } = store.getState();
 
 	    this.input.blur();
 
 	    if (answer.trim().toLowerCase() !== rightAnswer.toLowerCase()) {
 		    store.setState({
+			    vocab: mode === 'reviewing' ? vocab.map((word) => {
+			    	if (word.id === rightAnswer.id) {
+			    		return {
+			    			...word,
+						    bad: true,
+					    }
+				    }
+
+			    	return word;
+			    }) : vocab,
 			    badDecks: [
 				    ...badDecks,
 				    currentDeck,
@@ -81,6 +91,7 @@ export default class Answer extends React.Component {
                             onFocus={this._onInputFocus}
                             onBlur={this._onInputBlur}
                             onChangeText={this._onChangeText}
+                            onSubmitEditing={this._submitAnswer}
                             value={answer}
                             autoCorrect={false}
                             autoCompleteType={'off'}
@@ -107,7 +118,7 @@ const {width} = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'flex-end',
         marginTop: 5
     },
