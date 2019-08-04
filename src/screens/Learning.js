@@ -21,12 +21,12 @@ export default class Learning extends Component {
 	viewPager = null;
 
 	_moveToNextDeck = () => {
-		const { totalPossibleGrade, currentDeck, vocab, badDecks, lessonOver } = store.getState();
+		const { totalPossibleGrade, currentDeck, badDecks, lessonOver } = store.getState();
 		let index = 0;
 
 		if (totalPossibleGrade > 30) return this._endLesson(false);
 
-		if (currentDeck < vocab.length - 1 && !lessonOver) {
+		if (currentDeck < 19 && !lessonOver) { // 19 là số tổng số decks trong trường hợp lí tưởng
 			index = currentDeck + 1;
 			store.setState({
 				currentDeck: index,
@@ -38,7 +38,7 @@ export default class Learning extends Component {
 			store.setState({
 				currentDeck: index,
 				lessonOver: true,
-				badDecks: badDecks.filter((_, i) => i !== index),
+				badDecks: badDecks.filter(deck => deck !== index),
 			});
 
 			this.viewPager.setPageWithoutAnimation(index);

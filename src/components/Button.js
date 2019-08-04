@@ -1,6 +1,8 @@
 import React from 'react';
-import {Animated, View, TouchableOpacity, Text, ColorPropType, ViewPropTypes} from "react-native";
+import {Animated, View, TouchableOpacity, Text, ColorPropType, ViewPropTypes, UIManager} from "react-native";
 import PropTypes from 'prop-types';
+
+import { LinearGradient } from 'expo';
 
 export default function Button({
 	style,
@@ -11,20 +13,34 @@ export default function Button({
 	IconType,
 	ButtonType,
 	onPress,
+	onPressOut,
 	buttonProps,
 	animated,
 	title,
 	showIcon,
+	// gradient
+	useLinearGradient,
+	colors,
+	locations,
+	start,
+	end,
 	children
 }) {
-	const WrapperView = animated ? Animated.View : View;
+	const WrapperView = animated ? Animated.View : useLinearGradient ? LinearGradient : View;
 
 	return ButtonType === TouchableOpacity ? (
 		<ButtonType
 			onPress={onPress}
+			onPressOut={onPressOut}
 			{...buttonProps}
 		>
-			<WrapperView style={style}>
+			<WrapperView
+				colors={colors}
+				style={style}
+				locations={locations}
+				start={start}
+				end={end}
+			>
 				{showIcon && (
 					<IconType
 						name={name}
@@ -38,8 +54,18 @@ export default function Button({
 		</ButtonType>
 	) : (
 		<View>
-			<ButtonType onPress={onPress} {...buttonProps}>
-				<WrapperView style={style}>
+			<ButtonType
+				onPress={onPress}
+				onPressOut={onPressOut}
+				{...buttonProps}
+			>
+				<WrapperView
+					colors={colors}
+					style={style}
+					locations={locations}
+					start={start}
+					end={end}
+				>
 					{showIcon && (
 						<IconType
 							name={name}
@@ -71,7 +97,11 @@ Button.propTypes = {
 Button.defaultProps = {
 	ButtonType: TouchableOpacity,
 	onPress: () => {},
-	animated: false,
+	onPressOut: () => {},
 	title: '',
 	showIcon: true,
+	// animated
+	animated: false,
+	// gradient
+	colors: ['#fff', '#fff'],
 };

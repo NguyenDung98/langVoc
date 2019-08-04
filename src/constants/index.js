@@ -9,5 +9,7 @@ export const MONSTERRAT_REGULAR = 'monsterrat-regular';
 export const MONSTERRAT_MEDIUM = 'monsterrat-medium';
 export const MONSTERRAT_MEDIUM_ITALIC = 'monsterrat-medium-italic';
 export const MONSTERRAT_ITALIC = 'monsterrat-italic';
+export const PACIFICO_REGULAR = 'PACIFICO_REGULAR';
+export const DANCING_SCRIPT_BOLD = 'DANCING_SCRIPT_BOLD';
 
 export * from './data';

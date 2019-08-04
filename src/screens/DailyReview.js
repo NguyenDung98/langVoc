@@ -34,7 +34,7 @@ export default class DailyReview extends React.Component {
 			store.setState({
 				currentDeck: index,
 				lessonOver: true,
-				badDecks: badDecks.filter((_, i) => i !== index),
+				badDecks: badDecks.filter(deck => deck !== index),
 			});
 
 			this.viewPager.setPageWithoutAnimation(index);

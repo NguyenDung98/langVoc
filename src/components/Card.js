@@ -34,7 +34,7 @@ class Card extends Component {
             imageStyle,
             textContainerStyle,
             wordTypeStyle,
-            definitionStyle
+	        definitionText
         } = styles;
 
         if (this.state.showImage) {
@@ -50,7 +50,7 @@ class Card extends Component {
             <View style={textContainerStyle}>
                 <Text style={wordTypeStyle}>
                     ({wordType})
-                    <Text style={definitionStyle}>
+                    <Text style={definitionText}>
                         {` ${definition}`}
                     </Text>
                 </Text>
