@@ -29,6 +29,7 @@ export default class ListItem extends React.PureComponent {
 		buttonType: PropTypes.any,
 		buttonIconName: PropTypes.string,
 		buttonIconType: PropTypes.any,
+		buttonIconSize: PropTypes.number,
 		buttonColor: ColorPropType,
 		buttonStyle: ViewPropTypes.style,
 		buttonProps: PropTypes.object,
@@ -45,6 +46,7 @@ export default class ListItem extends React.PureComponent {
 		avatarIconWidth: 30,
 		buttonIconName: 'md-more',
 		buttonIconType: Ionicons,
+		buttonIconSize: 30,
 		buttonColor: DISABLED_COLOR,
 		showMoreButton: true,
 		showProgress: false,
@@ -69,6 +71,7 @@ export default class ListItem extends React.PureComponent {
 			buttonType,
 			buttonIconName,
 			buttonIconType,
+			buttonIconSize,
 			buttonColor,
 			buttonStyle,
 			buttonProps,
@@ -110,7 +113,7 @@ export default class ListItem extends React.PureComponent {
 							style={[styles.moreBtnStyle, buttonStyle]}
 							IconType={buttonIconType}
 							name={buttonIconName}
-							iconSize={30}
+							iconSize={buttonIconSize}
 							color={buttonColor}
 						/>
 					)}

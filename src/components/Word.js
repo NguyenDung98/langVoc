@@ -21,17 +21,11 @@ export default class Word extends React.Component {
         wordForm: null,
     };
 
-	constructor(props) {
-		super(props);
-
-		const color = props.mainColor;
-
-		this.state = {
-			volumeBtnColor: color,
-			volumeBtnContainerColor: 'white',
-			isPlaying: false
-		};
-	}
+	state = {
+		volumeBtnContainerColor: 'white',
+		volumeBtnColor: this.props.mainColor,
+		isPlaying: false
+	};
 
 	_onPlaybackStatusUpdate = ({didJustFinish}) => {
         if (didJustFinish) {

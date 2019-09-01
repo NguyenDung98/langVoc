@@ -6,7 +6,7 @@ import {
 	TouchableWithoutFeedback,
 	UIManager,
 	View,
-	TouchableOpacity
+	TouchableNativeFeedback,
 } from 'react-native';
 import ListItem from "./ListItem";
 import { Audio } from 'expo';
@@ -19,6 +19,8 @@ export default class WordListItem extends React.Component {
 	state = {
 		showDefinition: false,
 		playingSound: false,
+		volumeBtnContainerColor: 'white',
+		volumeBtnColor: LIGHT_GREEN,
 	};
 
 	_toggleDefinition = () => {
@@ -32,6 +34,8 @@ export default class WordListItem extends React.Component {
 		if (didJustFinish) {
 			this.setState({
 				playingSound: false,
+				volumeBtnColor: LIGHT_GREEN,
+				volumeBtnContainerColor: 'white',
 			})
 		}
 	};
@@ -45,6 +49,8 @@ export default class WordListItem extends React.Component {
 		try {
 			this.setState({
 				playingSound: true,
+				volumeBtnColor: 'white',
+				volumeBtnContainerColor: LIGHT_GREEN,
 			}, async () => {
 				await Audio.Sound.createAsync(audio, { shouldPlay: true }, this._onPlaybackStatusUpdate);
 			});
@@ -55,7 +61,12 @@ export default class WordListItem extends React.Component {
 
 	render() {
 		const {word: {image, word, meaning, wordType, definition}} = this.props;
-		const { showDefinition, playingSound } = this.state;
+		const { showDefinition, playingSound, volumeBtnColor, volumeBtnContainerColor } = this.state;
+
+		const dynamicBtn = {
+			backgroundColor: volumeBtnContainerColor,
+			borderColor: LIGHT_GREEN,
+		};
 
 		return (
 			<TouchableWithoutFeedback onPress={this._toggleDefinition}>
@@ -69,11 +80,14 @@ export default class WordListItem extends React.Component {
 						subTitle={meaning}
 						subTitleColor={'grey'}
 						buttonIconName={'md-volume-high'}
-						buttonType={TouchableOpacity}
-						buttonColor={LIGHT_GREEN}
+						buttonIconSize={25}
+						buttonType={TouchableNativeFeedback}
+						buttonColor={volumeBtnColor}
 						buttonProps={{
+							underlayColor: 'transparent',
 							disabled: playingSound,
 						}}
+						buttonStyle={[styles.volumeBtnContainer, dynamicBtn]}
 						onButtonPress={this._playSound}
 					/>
 					{showDefinition && (
@@ -105,5 +119,14 @@ const styles = StyleSheet.create({
 	wordType: {
 		fontFamily: MONSTERRAT_MEDIUM_ITALIC,
 		color: 'grey',
+	},
+	volumeBtnContainer: {
+		height: 40,
+		width: 40,
+		alignItems: 'center',
+		justifyContent: 'center',
+		borderRadius: 40 * 0.5,
+		borderWidth: 1,
+		marginTop: 5,
 	}
 });

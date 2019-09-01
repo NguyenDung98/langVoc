@@ -1,5 +1,6 @@
 import React from "react";
 import {View, StyleSheet, TextInput, Dimensions, TouchableOpacity} from 'react-native';
+
 import { AntDesign } from '@expo/vector-icons';
 import {DISABLED_COLOR, LIGHT_GREEN, MONSTERRAT_MEDIUM, RED} from "../constants";
 import store from "../store";

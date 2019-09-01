@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text, Animated, Easing, Platform} from 'react-native';
 import {Menu} from "../components/Menu";
 import {DangerZone} from 'expo';
-import {DANCING_SCRIPT_BOLD} from "../constants";
+import {DANCING_SCRIPT_BOLD, MONSTERRAT_ITALIC, MONSTERRAT_REGULAR} from "../constants";
 
 const {Lottie} = DangerZone;
 
@@ -14,7 +14,19 @@ const ANIMATION_CONFIG = {
 const THEME_ICON = Math.random() > 0.5 ? require('../../assets/vocab-main-theme')
 	: require('../../assets/vocab-main-theme-1');
 
-export default class Home extends React.Component {
+export default class VocabSetHome extends React.Component {
+	// todo make a vocab set header component: avatar - title
+	static navigationOptions = {
+		title: 'Animal, Family and People',
+		headerStyle: {
+			elevation: 1,
+		},
+		headerTitleStyle: {
+			fontFamily: MONSTERRAT_ITALIC,
+			fontSize: 18,
+		}
+	};
+
 	themeAnimation = new Animated.Value(0.35);
 	wordListAnimation = new Animated.Value(0.4);
 	learningAnimation = new Animated.Value(0);
