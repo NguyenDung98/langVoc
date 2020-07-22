@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Text, TouchableWithoutFeedback, Dimensions, StyleSheet, View, Image} from 'react-native';
-import {LIGHT_GREEN, MONSTERRAT_MEDIUM, MONSTERRAT_MEDIUM_ITALIC} from "../constants";
+import {LIGHT_GREEN, MONTSERRAT_MEDIUM, MONTSERRAT_MEDIUM_ITALIC} from "../constants";
 import {CardShape} from "../utils/CardUtils";
 import PropTypes from 'prop-types';
 
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
     },
     wordTypeStyle: {
         color: 'grey',
-        fontFamily: MONSTERRAT_MEDIUM_ITALIC,
+        fontFamily: MONTSERRAT_MEDIUM_ITALIC,
         textAlign: 'center',
         fontSize: 16
     },
     definitionText: {
         fontStyle: 'normal',
-        fontFamily: MONSTERRAT_MEDIUM,
+        fontFamily: MONTSERRAT_MEDIUM,
         color: 'black'
     }
 });

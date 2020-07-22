@@ -2,10 +2,12 @@ import React, {Component} from "react";
 import {
 	StyleSheet,
 	KeyboardAvoidingView,
+	Keyboard,
+	Dimensions,
 } from "react-native";
 import StatusBar from "../components/StatusBar";
 import ProgressBar from "../components/ProgressBar";
-import {ViewPager} from "rn-viewpager";
+import ViewPager from "@react-native-community/viewpager";
 import AnswerModal from "../components/AnswerModal";
 
 import {data} from "../constants";
@@ -15,10 +17,26 @@ import {updateWordReviewCalendar} from "../helpers";
 
 export default class Learning extends Component {
 	static navigationOptions = {
-		header: null,
+		header: () => null,
 	};
 
+	viewHeight = Dimensions.get('screen').height;
 	viewPager = null;
+
+	componentDidMount() {
+		this.keyboardDidShowListener = Keyboard.addListener(
+			'keyboardDidShow',
+			this._keyboardDidShow,
+		);
+	}
+
+	componentWillUnmount() {
+		this.keyboardDidShowListener.remove();
+	}
+
+	_keyboardDidShow = () => {
+		this.viewHeight = Dimensions.get('screen').height
+	};
 
 	_moveToNextDeck = () => {
 		const { totalPossibleGrade, currentDeck, badDecks, lessonOver } = store.getState();
@@ -67,6 +85,7 @@ export default class Learning extends Component {
 			<KeyboardAvoidingView
 				style={container}
 				behavior={'padding'}
+				keyboardVerticalOffset={-this.viewHeight}
 				enabled
 			>
 				<StatusBar translucent backgroundColor={'#068E47'}/>
@@ -92,5 +111,6 @@ export default class Learning extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+
 	},
 });

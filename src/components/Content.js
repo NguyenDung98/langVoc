@@ -4,7 +4,6 @@ import Card from "./Card";
 import Learning from "./Learning";
 import PropTypes from 'prop-types';
 import {CardShape, WordShape} from '../utils';
-import {ViewPager} from "rn-viewpager";
 
 export default class Content extends React.Component {
 	static propTypes = {

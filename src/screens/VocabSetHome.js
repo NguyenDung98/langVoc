@@ -1,23 +1,26 @@
 import React from 'react';
 import {StyleSheet, View, Text, Animated, Easing, Platform} from 'react-native';
 import {Menu} from "../components/Menu";
-import {DangerZone} from 'expo';
+import LottieView from "lottie-react-native";
 import {DANCING_SCRIPT_BOLD} from "../constants";
 import VocabSetHomeHeader from "../components/VocabSetHomeHeader";
-
-const {Lottie} = DangerZone;
 
 const ANIMATION_CONFIG = {
 	toValue: 1,
 	duration: 800,
 	easing: Easing.linear,
+	useNativeDriver: true,
 };
 const THEME_ICON = Math.random() > 0.5 ? require('../../assets/vocab-main-theme')
 	: require('../../assets/vocab-main-theme-1');
 
 export default class VocabSetHome extends React.Component {
 	static navigationOptions = {
-		header: <VocabSetHomeHeader />,
+		header: () => <VocabSetHomeHeader />,
+	};
+
+	state = {
+		canPress: true,
 	};
 
 	themeAnimation = new Animated.Value(0.35);
@@ -31,6 +34,7 @@ export default class VocabSetHome extends React.Component {
 			toValue: 0.7,
 			duration: 2000,
 			easing: Easing.linear,
+			useNativeDriver: true,
 		}), {
 			iterations: -1,
 		}).start();
@@ -38,6 +42,9 @@ export default class VocabSetHome extends React.Component {
 
 	_navigateToWordList = () => {
 		const {navigation: {navigate}} = this.props;
+		this.setState({
+			canPress: false,
+		});
 
 		Animated.timing(this.wordListAnimation, {
 			...ANIMATION_CONFIG,
@@ -46,23 +53,35 @@ export default class VocabSetHome extends React.Component {
 			if (finished) {
 				this.wordListAnimation.setValue(0.3);
 				navigate('WordList');
+				this.setState({
+					canPress: true
+				})
 			}
 		});
 	};
 
 	_navigateToLearning = () => {
 		const { navigation: { navigate } } = this.props;
+		this.setState({
+			canPress: false,
+		});
 
 		Animated.timing(this.learningAnimation, ANIMATION_CONFIG).start(({finished}) => {
 			if (finished) {
 				this.learningAnimation.setValue(0);
 				navigate('Learning');
+				this.setState({
+					canPress: true
+				})
 			}
 		})
 	};
 
 	_navigateToReviewing = () => {
 		const { navigation: { navigate } } = this.props;
+		this.setState({
+			canPress: false,
+		});
 
 		Animated.timing(this.reviewingAnimation, {
 			...ANIMATION_CONFIG,
@@ -71,12 +90,18 @@ export default class VocabSetHome extends React.Component {
 			if (finished) {
 				this.reviewingAnimation.setValue(1);
 				navigate('DailyReview');
+				this.setState({
+					canPress: true
+				})
 			}
 		})
 	};
 
 	_navigateToMultipleChoice = () => {
 		const { navigation: { navigate } } = this.props;
+		this.setState({
+			canPress: false,
+		});
 
 		Animated.timing(this.multipleChoiceAnimation, {
 			...ANIMATION_CONFIG,
@@ -86,6 +111,9 @@ export default class VocabSetHome extends React.Component {
 			if (finished) {
 				this.multipleChoiceAnimation.setValue(0.5);
 				navigate('MultipleChoiceReview');
+				this.setState({
+					canPress: true
+				})
 			}
 		})
 	};
@@ -94,7 +122,7 @@ export default class VocabSetHome extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.themeContainer}>
-					<Lottie
+					<LottieView
 						progress={this.themeAnimation}
 						source={THEME_ICON}
 						style={styles.themeIcon}
@@ -113,10 +141,11 @@ export default class VocabSetHome extends React.Component {
 						iconSource={require('../../assets/view-list')}
 						title={'Danh sách từ vựng'}
 						iconStyle={{
-							left: 30,
+							left: 10,
 							bottom: Platform.OS === 'ios' ? 3 : 0,
 						}}
 						locations={[0, 0.21, 1]}
+						disabled={!this.state.canPress}
 					/>
 					<Menu
 						progress={this.learningAnimation}
@@ -125,10 +154,11 @@ export default class VocabSetHome extends React.Component {
 						title={'Bắt đầu học nào'}
 						iconStyle={{
 							width: 80,
-							left: 27,
+							left: 10,
 							bottom: Platform.OS === 'ios' ? -8 : -2,
 						}}
 						locations={[0, 0.51, 1]}
+						disabled={!this.state.canPress}
 					/>
 					<Menu
 						progress={this.reviewingAnimation}
@@ -137,9 +167,10 @@ export default class VocabSetHome extends React.Component {
 						title={'Ôn tập hằng ngày'}
 						iconStyle={{
 							bottom: Platform.OS === 'ios' ? 3 : 2,
-							left: Platform.OS === 'ios' ? 25 : 30,
+							left: Platform.OS === 'ios' ? 25 : 10,
 						}}
 						locations={[0, 0.71, 1]}
+						disabled={!this.state.canPress}
 					/>
 					<Menu
 						progress={this.multipleChoiceAnimation}
@@ -148,10 +179,11 @@ export default class VocabSetHome extends React.Component {
 						title={'Chọn đáp án'}
 						iconStyle={{
 							width: 90,
-							bottom: Platform.OS === 'ios' ? -18 : -12,
-							left: 30,
+							bottom: Platform.OS === 'ios' ? -18 : -8,
+							left: 10,
 						}}
 						locations={[0, 0.91, 1]}
+						disabled={!this.state.canPress}
 					/>
 				</View>
 			</View>

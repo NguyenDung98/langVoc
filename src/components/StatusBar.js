@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, View, ColorPropType} from "react-native";
-import {Constants} from "expo";
+import Constants from 'expo-constants';
 
 export default function StatusBar({backgroundColor}) {
     return (

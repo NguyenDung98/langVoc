@@ -1,8 +1,13 @@
 import React from 'react';
-import {KeyboardAvoidingView, StyleSheet, View} from 'react-native';
+import {
+	KeyboardAvoidingView,
+	StyleSheet,
+	Keyboard,
+	Dimensions,
+} from 'react-native';
 import StatusBar from "../components/StatusBar";
 import ProgressBar from "../components/ProgressBar";
-import {ViewPager} from "rn-viewpager";
+import ViewPager from "@react-native-community/viewpager";
 import {createDailyReview} from "../utils";
 import {data} from "../constants";
 import AnswerModal from "../components/AnswerModal";
@@ -11,10 +16,26 @@ import {updateWordReviewCalendar} from "../helpers";
 
 export default class DailyReview extends React.Component {
 	static navigationOptions = {
-		header: null,
+		header: () => null,
 	};
 
+	viewHeight = Dimensions.get('screen').height;
 	viewPager = null;
+
+	componentDidMount() {
+		this.keyboardDidShowListener = Keyboard.addListener(
+			'keyboardDidShow',
+			this._keyboardDidShow,
+		);
+	}
+
+	componentWillUnmount() {
+		this.keyboardDidShowListener.remove();
+	}
+
+	_keyboardDidShow = () => {
+		this.viewHeight = Dimensions.get('screen').height
+	};
 
 	_moveToNextDeck = () => {
 		const { totalPossibleGrade, currentDeck, vocab, badDecks, lessonOver } = store.getState();
@@ -62,6 +83,7 @@ export default class DailyReview extends React.Component {
 			<KeyboardAvoidingView
 				style={styles.container}
 				behavior={'padding'}
+				keyboardVerticalOffset={-this.viewHeight}
 				enabled
 			>
 				<StatusBar translucent backgroundColor={'#068E47'}/>

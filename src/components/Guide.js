@@ -1,6 +1,6 @@
 import React from "react";
 import {View, StyleSheet, Text} from 'react-native';
-import {MONSTERRAT_REGULAR} from "../constants";
+import {MONTSERRAT_REGULAR} from "../constants";
 import PropTypes from 'prop-types';
 
 export default function Guide({content}) {
@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
     contentStyle: {
         textAlign: 'center',
         fontSize: 14,
-        fontFamily: MONSTERRAT_REGULAR
+        fontFamily: MONTSERRAT_REGULAR
     }
 });

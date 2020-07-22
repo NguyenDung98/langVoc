@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, Text, Dimensions, StyleSheet} from 'react-native';
-import {MONSTERRAT_MEDIUM} from "../constants";
+import {MONTSERRAT_MEDIUM} from "../constants";
 
 const {width} = Dimensions.get('screen');
 
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 	},
 	textStyle: {
 		fontSize: 15,
-		fontFamily: MONSTERRAT_MEDIUM,
+		fontFamily: MONTSERRAT_MEDIUM,
 		marginLeft: 5,
 		textAlign: 'center',
 	}

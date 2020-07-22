@@ -2,7 +2,7 @@ import React from "react";
 import {ColorPropType, ViewPropTypes, StyleSheet, Text, View} from "react-native";
 // import Slider from 'react-native-slider';
 import PropTypes from "prop-types";
-import {MONSTERRAT_ITALIC, MONSTERRAT_REGULAR} from "../constants";
+import {MONTSERRAT_ITALIC, MONTSERRAT_REGULAR} from "../constants";
 
 export default function ListItemInfo({
    subTitle,
@@ -74,12 +74,12 @@ ListItemInfo.defaultProps = {
 
 const styles = StyleSheet.create({
 	title: (titleSize, titleColor) => ({
-		fontFamily: MONSTERRAT_REGULAR,
+		fontFamily: MONTSERRAT_REGULAR,
 		fontSize: titleSize,
 		color: titleColor,
 	}),
 	subTitle: (subTitleSize, subTitleColor) =>  ({
-		fontFamily: MONSTERRAT_ITALIC,
+		fontFamily: MONTSERRAT_ITALIC,
 		fontSize: subTitleSize,
 		color: subTitleColor,
 	}),

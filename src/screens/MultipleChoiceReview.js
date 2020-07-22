@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import ProgressBar from "../components/ProgressBar";
 import StatusBar from "../components/StatusBar";
 
-import {ViewPager} from "rn-viewpager";
+import ViewPager from "@react-native-community/viewpager";
 import {createMultipleChoiceReview} from "../utils/";
 
 import {data} from '../constants/index';
@@ -12,7 +12,7 @@ import {updateWordMultipleChoice} from "../helpers";
 
 export default class MultipleChoiceReview extends React.Component {
 	static navigationOptions = {
-		header: null,
+		header: () => null,
 	};
 
 	viewPager = null;

@@ -1,10 +1,8 @@
 import React  from 'react';
 import {StyleSheet, Text} from "react-native";
 import Button from "./Button";
-import {DangerZone} from 'expo';
-import {MONSTERRAT_ITALIC} from "../constants";
-
-const {Lottie} = DangerZone;
+import LottieView from "lottie-react-native";
+import {MONTSERRAT_ITALIC} from "../constants";
 
 export class Menu extends React.Component {
 	render() {
@@ -16,6 +14,7 @@ export class Menu extends React.Component {
 			iconStyle,
 			containerStyle,
 			locations,
+			disabled,
 		} = this.props;
 
 		return (
@@ -30,9 +29,10 @@ export class Menu extends React.Component {
 				end={[1, 1]}
 				buttonProps={{
 					activeOpacity: 0.9,
+					disabled
 				}}
 			>
-				<Lottie
+				<LottieView
 					progress={progress}
 					loop={false}
 					style={[styles.iconStyle, iconStyle]}
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 	},
 	textStyle: {
 		fontSize: 20,
-		fontFamily: MONSTERRAT_ITALIC,
+		fontFamily: MONTSERRAT_ITALIC,
 		color: 'white',
 	},
 });

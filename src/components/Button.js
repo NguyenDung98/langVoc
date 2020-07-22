@@ -2,7 +2,7 @@ import React from 'react';
 import {Animated, View, TouchableOpacity, Text, ColorPropType, ViewPropTypes, UIManager} from "react-native";
 import PropTypes from 'prop-types';
 
-import { LinearGradient } from 'expo';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Button({
 	style,

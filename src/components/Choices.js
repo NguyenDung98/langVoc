@@ -5,9 +5,9 @@ import Guide from "./Guide";
 import Button from "./Button";
 import PropTypes from "prop-types";
 
-import {Audio} from "expo";
+import {Audio} from "expo-av";
 
-import {DISABLED_COLOR, LIGHT_GREEN, MONSTERRAT_REGULAR, RED} from "../constants";
+import {DISABLED_COLOR, LIGHT_GREEN, MONTSERRAT_REGULAR, RED} from "../constants";
 import {CardShape, WordShape} from "../utils";
 import store from "../store";
 
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
 		padding: 13,
 	},
 	optionTextStyle: {
-		fontFamily: MONSTERRAT_REGULAR,
+		fontFamily: MONTSERRAT_REGULAR,
 		fontSize: 18,
 		textAlign: 'center',
 	},

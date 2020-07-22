@@ -3,9 +3,9 @@ import {View, StyleSheet, ColorPropType, Text, TouchableHighlight} from 'react-n
 import Button from "./Button";
 
 import {Ionicons} from '@expo/vector-icons';
-import {Audio} from 'expo';
+import {Audio} from 'expo-av';
 
-import {DISABLED_COLOR, MONSTERRAT_ITALIC, MONSTERRAT_MEDIUM, MONSTERRAT_REGULAR} from "../constants";
+import {DISABLED_COLOR, MONTSERRAT_ITALIC, MONTSERRAT_MEDIUM, MONTSERRAT_REGULAR} from "../constants";
 import {WordShape} from "../utils/WordUtils";
 import PropTypes from 'prop-types';
 
@@ -110,16 +110,16 @@ const styles = StyleSheet.create({
     },
     wordStyle: {
         fontSize: 30,
-        fontFamily: MONSTERRAT_MEDIUM,
+        fontFamily: MONTSERRAT_MEDIUM,
     },
     spellingStyle: {
         fontSize: 15,
-        fontFamily: MONSTERRAT_ITALIC,
+        fontFamily: MONTSERRAT_ITALIC,
         color: '#818181'
     },
     meaningStyle: {
         fontSize: 17,
-        fontFamily: MONSTERRAT_REGULAR,
+        fontFamily: MONTSERRAT_REGULAR,
     },
     volumeBtnContainer: {
         height: 45,

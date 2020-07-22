@@ -3,13 +3,13 @@ import {View, Animated, StyleSheet, Modal, TouchableWithoutFeedback, Text} from 
 import Word from "./Word";
 import Button from "./Button";
 
-import {Audio} from 'expo';
+import {Audio} from 'expo-av';
 import {FontAwesome, Entypo} from '@expo/vector-icons';
 
 import correctSound from '../../assets/correct.mp3';
 import incorrectSound from '../../assets/incorrect.mp3';
 import store from "../store";
-import {DARK_GREEN, LIGHT_GREEN, MONSTERRAT_MEDIUM, RED} from "../constants";
+import {DARK_GREEN, LIGHT_GREEN, MONTSERRAT_MEDIUM, RED} from "../constants";
 import {configureAnimations} from "../utils";
 
 export default class AnswerModal extends React.Component {
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
 		height: 40,
 	},
 	notifiedText: {
-		fontFamily: MONSTERRAT_MEDIUM,
+		fontFamily: MONTSERRAT_MEDIUM,
 		fontSize: 20,
 		color: 'white',
 	},

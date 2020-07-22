@@ -2,28 +2,26 @@ import React from 'react';
 import {StyleSheet, TextInput, View} from "react-native";
 import StatusBar from "./StatusBar";
 
-import {DARK_GREEN, DISABLED_COLOR, MONSTERRAT_MEDIUM} from "../constants";
+import {DARK_GREEN, DISABLED_COLOR, MONTSERRAT_MEDIUM} from "../constants";
 import {Ionicons} from "@expo/vector-icons";
 
-export default class WordListHeader extends React.Component {
-	render() {
-		return (
-			<View>
-				<StatusBar backgroundColor={DARK_GREEN}/>
-				<View style={styles.inputContainer}>
-					<Ionicons
-						name={'ios-search'}
-						size={25}
-						color={DISABLED_COLOR}
-					/>
-					<TextInput
-						style={styles.inputStyle}
-						placeholder={'Tìm kiếm từ vựng'}
-					/>
-				</View>
+export default function WordListHeader() {
+	return (
+		<View style={{flex: 1}}>
+			<StatusBar backgroundColor={DARK_GREEN}/>
+			<View style={styles.inputContainer}>
+				<Ionicons
+					name={'ios-search'}
+					size={25}
+					color={DISABLED_COLOR}
+				/>
+				<TextInput
+					style={styles.inputStyle}
+					placeholder={'Tìm kiếm từ vựng'}
+				/>
 			</View>
-		)
-	}
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
 	},
 	inputStyle: {
 		fontSize: 15,
-		fontFamily: MONSTERRAT_MEDIUM,
+		fontFamily: MONTSERRAT_MEDIUM,
 		flex: 1,
 		marginLeft: 5,
 	},

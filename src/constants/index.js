@@ -5,11 +5,11 @@ export const RED = '#ff5a58';
 export const DISABLED_COLOR = '#c6c6c6';
 export const LIGHT_GREY = '#e6e6e6';
 // fontFamily
-export const MONSTERRAT_REGULAR = 'monsterrat-regular';
-export const MONSTERRAT_MEDIUM = 'monsterrat-medium';
-export const MONSTERRAT_MEDIUM_ITALIC = 'monsterrat-medium-italic';
-export const MONSTERRAT_ITALIC = 'monsterrat-italic';
-export const PACIFICO_REGULAR = 'PACIFICO_REGULAR';
-export const DANCING_SCRIPT_BOLD = 'DANCING_SCRIPT_BOLD';
+export const MONTSERRAT_REGULAR = 'Montserrat_400Regular';
+export const MONTSERRAT_MEDIUM = 'Montserrat_500Medium';
+export const MONTSERRAT_MEDIUM_ITALIC = 'Montserrat_500Medium_Italic';
+export const MONTSERRAT_ITALIC = 'Montserrat_400Regular_Italic';
+export const PACIFICO_REGULAR = 'Pacifico_400Regular';
+export const DANCING_SCRIPT_BOLD = 'DancingScript_700Bold';
 
 export * from './data';

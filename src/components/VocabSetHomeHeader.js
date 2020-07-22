@@ -2,12 +2,12 @@ import React from 'react';
 import {Text, View, StyleSheet} from "react-native";
 import StatusBar from "./StatusBar";
 import Avatar from "./Avatar";
-import {MONSTERRAT_MEDIUM} from "../constants";
+import {MONTSERRAT_MEDIUM} from "../constants";
 
 export default function VocabSetHome() {
 	return (
 		<View style={styles.headerContainer}>
-			<StatusBar/>
+			<StatusBar backgroundColor={'#eee'}/>
 			<View style={styles.headerContent}>
 				<Avatar
 					uri={'https://images2.minutemediacdn.com/image/upload/c_crop,h_1188,w_2120,x_0,y_227/f_auto,q_auto,w_1100/v1554729678/shape/mentalfloss/58331-istock-479586616.jpg'}
@@ -25,7 +25,8 @@ export default function VocabSetHome() {
 
 const styles = StyleSheet.create({
 	headerContainer: {
-		elevation: 1
+		elevation: 1,
+		marginLeft: 10
 	},
 	headerContent: {
 		flexDirection: 'row',
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
 	},
 	textStyle: {
 		fontSize: 15,
-		fontFamily: MONSTERRAT_MEDIUM,
+		fontFamily: MONTSERRAT_MEDIUM,
 		marginLeft: 5,
 	}
 });

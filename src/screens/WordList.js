@@ -1,5 +1,6 @@
 import React from 'react';
 import {FlatList, View} from 'react-native';
+import Constants from 'expo-constants';
 
 import WordListItem from "../components/WordListItem";
 import WordListHeader from "../components/WordListHeader";
@@ -10,7 +11,7 @@ const keyExtractor = (_, index) => index.toString();
 
 export default class WordList extends React.Component {
 	static navigationOptions = {
-		header: <WordListHeader />
+		header: () => <WordListHeader />
 	};
 
 	_renderItem = ({item}) => {
@@ -23,13 +24,12 @@ export default class WordList extends React.Component {
 
 	render() {
 		return (
-			<View style={{flex: 1}}>
-				<FlatList
-					keyExtractor={keyExtractor}
-					data={data}
-					renderItem={this._renderItem}
-				/>
-			</View>
+			<FlatList
+				keyExtractor={keyExtractor}
+				data={data}
+				renderItem={this._renderItem}
+				style={{marginTop: 50 + Constants.statusBarHeight}}
+			/>
 		);
 	}
 }

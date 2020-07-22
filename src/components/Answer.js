@@ -2,7 +2,7 @@ import React from "react";
 import {View, StyleSheet, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
-import {DISABLED_COLOR, LIGHT_GREEN, MONSTERRAT_MEDIUM, RED} from "../constants";
+import {DISABLED_COLOR, LIGHT_GREEN, MONTSERRAT_MEDIUM, RED} from "../constants";
 import store from "../store";
 
 export default class Answer extends React.Component {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     },
     inputStyle: {
         fontSize: 20,
-        fontFamily: MONSTERRAT_MEDIUM
+        fontFamily: MONTSERRAT_MEDIUM
     },
     checkBtnContainer: {
         width: 50,

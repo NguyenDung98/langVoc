@@ -9,9 +9,9 @@ import {
 	TouchableNativeFeedback,
 } from 'react-native';
 import ListItem from "./ListItem";
-import { Audio } from 'expo';
+import { Audio } from 'expo-av';
 
-import {LIGHT_GREEN, MONSTERRAT_MEDIUM_ITALIC, MONSTERRAT_REGULAR} from "../constants";
+import {LIGHT_GREEN, MONTSERRAT_MEDIUM_ITALIC, MONTSERRAT_REGULAR} from "../constants";
 
 UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
@@ -113,11 +113,11 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	definitionText: {
-		fontFamily: MONSTERRAT_REGULAR,
+		fontFamily: MONTSERRAT_REGULAR,
 		fontSize: 14,
 	},
 	wordType: {
-		fontFamily: MONSTERRAT_MEDIUM_ITALIC,
+		fontFamily: MONTSERRAT_MEDIUM_ITALIC,
 		color: 'grey',
 	},
 	volumeBtnContainer: {
