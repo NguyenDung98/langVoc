@@ -14,7 +14,7 @@ export default function Navigation() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator headerMode={'screen'}>
-				{/*<Stack.Screen name="VocabSets" component={VocabSets} />*/}
+				<Stack.Screen name="VocabSets" component={VocabSets} />
 				<Stack.Screen
 					name="VocabSetHome"
 					component={VocabSetHome}

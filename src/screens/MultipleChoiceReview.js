@@ -6,7 +6,6 @@ import StatusBar from "../components/StatusBar";
 import ViewPager from "@react-native-community/viewpager";
 import {createMultipleChoiceReview} from "../utils/";
 
-import {data} from '../constants/index';
 import store from "../store";
 import {updateWordMultipleChoice} from "../helpers";
 
@@ -40,16 +39,14 @@ export default class MultipleChoiceReview extends React.Component {
 		return (
 			<View style={styles.container}>
 				<StatusBar translucent backgroundColor={'#068E47'}/>
-				<ProgressBar
-					goBack={() => alert("hello")}
-				/>
+				<ProgressBar/>
 				<ViewPager
 					ref={viewPager => this.viewPager = viewPager}
 					style={styles.container}
 					horizontalScroll={false}
 					scrollEnabled={false}
 				>
-					{createMultipleChoiceReview(6, data, this._moveToNextQuestion)}
+					{createMultipleChoiceReview(6, this.props.route.params.data, this._moveToNextQuestion)}
 				</ViewPager>
 			</View>
 		)

@@ -49,15 +49,15 @@ export default class VocabSetHome extends React.Component {
 		Animated.timing(this.wordListAnimation, {
 			...ANIMATION_CONFIG,
 			duration: 300,
-		}).start(({finished}) => {
-			if (finished) {
-				this.wordListAnimation.setValue(0.3);
-				navigate('WordList');
-				this.setState({
-					canPress: true
-				})
-			}
-		});
+		}).start();
+
+		setTimeout(() => {
+			this.wordListAnimation.setValue(0.3);
+			navigate('WordList', {data: this.props.route.params.data});
+			this.setState({
+				canPress: true
+			})
+		}, 300)
 	};
 
 	_navigateToLearning = () => {
@@ -66,15 +66,15 @@ export default class VocabSetHome extends React.Component {
 			canPress: false,
 		});
 
-		Animated.timing(this.learningAnimation, ANIMATION_CONFIG).start(({finished}) => {
-			if (finished) {
-				this.learningAnimation.setValue(0);
-				navigate('Learning');
-				this.setState({
-					canPress: true
-				})
-			}
-		})
+		Animated.timing(this.learningAnimation, ANIMATION_CONFIG).start();
+
+		setTimeout(() => {
+			this.learningAnimation.setValue(0);
+			navigate('Learning', {data: this.props.route.params.data});
+			this.setState({
+				canPress: true
+			})
+		}, 300)
 	};
 
 	_navigateToReviewing = () => {
@@ -86,15 +86,15 @@ export default class VocabSetHome extends React.Component {
 		Animated.timing(this.reviewingAnimation, {
 			...ANIMATION_CONFIG,
 			toValue: 0,
-		}).start(({finished}) => {
-			if (finished) {
-				this.reviewingAnimation.setValue(1);
-				navigate('DailyReview');
-				this.setState({
-					canPress: true
-				})
-			}
-		})
+		}).start();
+
+		setTimeout(() => {
+			this.reviewingAnimation.setValue(1);
+			navigate('DailyReview', {data: this.props.route.params.data});
+			this.setState({
+				canPress: true
+			})
+		}, 300)
 	};
 
 	_navigateToMultipleChoice = () => {
@@ -107,15 +107,15 @@ export default class VocabSetHome extends React.Component {
 			...ANIMATION_CONFIG,
 			toValue: 0.7,
 			duration: 1000,
-		}).start(({finished}) => {
-			if (finished) {
-				this.multipleChoiceAnimation.setValue(0.5);
-				navigate('MultipleChoiceReview');
-				this.setState({
-					canPress: true
-				})
-			}
-		})
+		}).start();
+
+		setTimeout(() => {
+			this.multipleChoiceAnimation.setValue(0.5);
+			navigate('MultipleChoiceReview',  {data: this.props.route.params.data});
+			this.setState({
+				canPress: true
+			})
+		}, 300)
 	};
 
 	render() {

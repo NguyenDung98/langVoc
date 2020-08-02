@@ -10,7 +10,6 @@ import ProgressBar from "../components/ProgressBar";
 import ViewPager from "@react-native-community/viewpager";
 import AnswerModal from "../components/AnswerModal";
 
-import {data} from "../constants";
 import {createDeckLesson} from "../utils";
 import store from "../store";
 import {updateWordReviewCalendar} from "../helpers";
@@ -89,16 +88,14 @@ export default class Learning extends Component {
 				enabled
 			>
 				<StatusBar translucent backgroundColor={'#068E47'}/>
-				<ProgressBar
-					goBack={() => alert("hello")}
-				/>
+				<ProgressBar/>
 				<ViewPager
 					ref={viewPager => this.viewPager = viewPager}
 					style={container}
 					horizontalScroll={false}
 					scrollEnabled={false}
 				>
-					{createDeckLesson(data)}
+					{createDeckLesson(this.props.route.params.data)}
 				</ViewPager>
 				<AnswerModal
 					moveToNextDeck={this._moveToNextDeck}

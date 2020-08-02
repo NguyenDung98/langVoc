@@ -1,0 +1,118 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "word": "Actor",
+      "spelling": "/ˈæk.tɚ/",
+      "meaning": "Diễn viên (nam)",
+      "audio": {
+        "uri": "https://dictionary.cambridge.org/media/english/us_pron/a/act/actor/actor.mp3"
+      },
+      "image": {
+        "uri": "https://unsplash.it/600/600"
+      },
+      "wordType": "n",
+      "definition": "Someone who pretends to be someone else while performing in a film, play, or television or radio programme",
+      "reviewTimes": 0,
+      "reviewDate": "2020-07-29T20:02:57.986Z",
+      "totalPossibleGrade": 0,
+      "multipleChoiceGrade": 0,
+      "priority": 2
+    },
+    {
+      "id": 1,
+      "word": "Actress",
+      "spelling": "/ˈæk.trəs/",
+      "meaning": "Diễn viên (nữ)",
+      "audio": {
+        "uri": "https://dictionary.cambridge.org/media/english/us_pron/u/usc/uscld/uscld01818.mp3"
+      },
+      "image": {
+        "uri": "https://unsplash.it/600/600"
+      },
+      "wordType": "n",
+      "definition": "A female actor",
+      "reviewTimes": 0,
+      "reviewDate": "2020-07-29T20:02:57.986Z",
+      "totalPossibleGrade": 0,
+      "multipleChoiceGrade": 0,
+      "priority": 1
+    },
+    {
+      "id": 2,
+      "word": "Thorn",
+      "spelling": "/ˈæk.trəs/",
+      "meaning": "Diễn viên (nữ)",
+      "audio": {
+        "uri": "https://dictionary.cambridge.org/media/english/us_pron/u/usc/uscld/uscld01818.mp3"
+      },
+      "image": {
+        "uri": "https://unsplash.it/600/600"
+      },
+      "wordType": "n",
+      "definition": "A female actor",
+      "reviewTimes": 0,
+      "reviewDate": "2020-07-29T20:02:57.986Z",
+      "totalPossibleGrade": 0,
+      "multipleChoiceGrade": 0,
+      "priority": 3
+    },
+    {
+      "id": 3,
+      "word": "King",
+      "spelling": "/ˈæk.trəs/",
+      "meaning": "Diễn viên (nữ)",
+      "audio": {
+        "uri": "https://dictionary.cambridge.org/media/english/us_pron/u/usc/uscld/uscld01818.mp3"
+      },
+      "image": {
+        "uri": "https://unsplash.it/600/600"
+      },
+      "wordType": "n",
+      "definition": "A female actor",
+      "reviewTimes": 0,
+      "reviewDate": "2020-07-29T20:02:57.986Z",
+      "totalPossibleGrade": 0,
+      "multipleChoiceGrade": 0,
+      "priority": 2
+    },
+    {
+      "id": 4,
+      "word": "Vessel",
+      "spelling": "/ˈæk.trəs/",
+      "meaning": "Diễn viên (nữ)",
+      "audio": {
+        "uri": "https://dictionary.cambridge.org/media/english/us_pron/u/usc/uscld/uscld01818.mp3"
+      },
+      "image": {
+        "uri": "https://unsplash.it/600/600"
+      },
+      "wordType": "n",
+      "definition": "A female actor",
+      "reviewTimes": 0,
+      "reviewDate": "2020-07-29T20:02:57.986Z",
+      "totalPossibleGrade": 0,
+      "multipleChoiceGrade": 0,
+      "priority": 2
+    },
+    {
+      "id": 5,
+      "word": "Time",
+      "spelling": "/ˈæk.trəs/",
+      "meaning": "Diễn viên (nữ)",
+      "audio": {
+        "uri": "https://dictionary.cambridge.org/media/english/us_pron/u/usc/uscld/uscld01818.mp3"
+      },
+      "image": {
+        "uri": "https://unsplash.it/600/600"
+      },
+      "wordType": "n",
+      "definition": "A female actor",
+      "reviewTimes": 0,
+      "reviewDate": "2020-07-29T20:02:57.986Z",
+      "totalPossibleGrade": 0,
+      "multipleChoiceGrade": 0,
+      "priority": 1
+    }
+  ]
+}

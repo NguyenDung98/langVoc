@@ -1,16 +1,13 @@
 import React, {Component} from "react";
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import {Feather} from '@expo/vector-icons';
 import * as Progress from "react-native-progress";
-import PropTypes from 'prop-types';
+
 import {LIGHT_GREEN} from "../constants";
 import store from "../store";
 
 class ProgressBar extends Component {
-	static propTypes = {
-		goBack: PropTypes.func.isRequired
-	};
-
 	componentDidMount() {
 		this.unsubcribe = store.onChange((prevState) => {
 			const { userGrade, totalPossibleGrade } = store.getState();
@@ -26,7 +23,7 @@ class ProgressBar extends Component {
 	}
 
 	render() {
-		const {goBack} = this.props;
+		const {navigation} = this.props;
 		const {exitBtn, progressContainer, container} = styles;
 		const {userGrade, totalPossibleGrade} = store.getState();
 
@@ -34,7 +31,7 @@ class ProgressBar extends Component {
 			<View style={container}>
 				<TouchableOpacity
 					style={exitBtn}
-					onPress={goBack}
+					onPress={() => navigation.goBack()}
 				>
 					<Feather
 						name="x-circle"
@@ -75,4 +72,8 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default ProgressBar;
+export default function (props) {
+	const navigation = useNavigation();
+
+	return <ProgressBar {...props} navigation={navigation}/>
+};

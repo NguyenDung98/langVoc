@@ -9,7 +9,7 @@ import StatusBar from "../components/StatusBar";
 import ProgressBar from "../components/ProgressBar";
 import ViewPager from "@react-native-community/viewpager";
 import {createDailyReview} from "../utils";
-import {data} from "../constants";
+
 import AnswerModal from "../components/AnswerModal";
 import store from "../store";
 import {updateWordReviewCalendar} from "../helpers";
@@ -87,16 +87,14 @@ export default class DailyReview extends React.Component {
 				enabled
 			>
 				<StatusBar translucent backgroundColor={'#068E47'}/>
-				<ProgressBar
-					goBack={() => alert("hello")}
-				/>
+				<ProgressBar/>
 				<ViewPager
 					ref={viewPager => this.viewPager = viewPager}
 					style={styles.container}
 					horizontalScroll={false}
 					scrollEnabled={false}
 				>
-					{createDailyReview(data)}
+					{createDailyReview(this.props.route.params.data)}
 				</ViewPager>
 				<AnswerModal
 					moveToNextDeck={this._moveToNextDeck}
